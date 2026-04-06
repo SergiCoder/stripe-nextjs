@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ListUserOrgs } from "@/application/use-cases/org/ListUserOrgs";
 import { GetSubscription } from "@/application/use-cases/billing/GetSubscription";
 import { ListPlans } from "@/application/use-cases/billing/ListPlans";
+import { ListProducts } from "@/application/use-cases/billing/ListProducts";
 import {
-  orgGateway,
   subscriptionGateway,
   planGateway,
+  productGateway,
 } from "@/infrastructure/registry";
 import { getCurrentUser } from "../_data/getCurrentUser";
 import { SubscriptionCard } from "@/presentation/components/organisms/SubscriptionCard";
@@ -15,7 +15,10 @@ import {
   type PricingTableProps,
 } from "@/presentation/components/organisms/PricingTable";
 import { CheckoutButton } from "./_components/CheckoutButton";
+import { TeamCheckoutButton } from "./_components/TeamCheckoutButton";
 import { BillingPortalButton } from "./_components/BillingPortalButton";
+import type { Plan } from "@/domain/models/Plan";
+import type { Product } from "@/domain/models/Product";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("billing");
@@ -27,12 +30,23 @@ export default async function BillingPage() {
     getTranslations("billing"),
     getCurrentUser(),
   ]);
-  const orgs = await new ListUserOrgs(orgGateway).execute(user.id);
-  const orgId = orgs[0]?.id;
 
-  const subscription = orgId
-    ? await new GetSubscription(subscriptionGateway).execute(orgId)
-    : null;
+  const subscription = await new GetSubscription(subscriptionGateway).execute();
+
+  let plans: Plan[] = [];
+  let products: Product[] = [];
+  try {
+    [plans, products] = await Promise.all([
+      new ListPlans(planGateway).execute(),
+      new ListProducts(productGateway).execute(),
+    ]);
+  } catch (err) {
+    console.error("Failed to fetch plans/products", err);
+  }
+
+  const planName = subscription
+    ? plans.find((p) => p.id === subscription.plan)?.name
+    : undefined;
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
@@ -40,71 +54,111 @@ export default async function BillingPage() {
 
       {subscription ? (
         <SubscriptionCard
-          planName={subscription.plan.name}
+          planName={planName ?? t("currentPlan")}
           status={subscription.status}
           statusLabel={subscription.status}
-          interval={subscription.plan.interval}
-          price={`$${subscription.quantity}`}
+          interval=""
+          price={`${subscription.quantity} ${subscription.quantity === 1 ? t("seat") : t("seats")}`}
           currentPeriodEnd={new Date(
             subscription.currentPeriodEnd,
           ).toLocaleDateString()}
-          periodEndLabel={t("currentPlan")}
-          cancelAtPeriodEnd={subscription.cancelAtPeriodEnd}
-          cancelLabel={subscription.cancelAtPeriodEnd ? t("cancel") : undefined}
-          actions={
-            <BillingPortalButton orgId={orgId}>
-              {t("portal")}
-            </BillingPortalButton>
+          periodEndLabel={t("periodEnd")}
+          cancelAtPeriodEnd={subscription.canceledAt !== null}
+          cancelLabel={
+            subscription.canceledAt !== null ? t("cancel") : undefined
           }
+          actions={<BillingPortalButton>{t("portal")}</BillingPortalButton>}
         />
       ) : (
-        <NoSubscription orgId={orgId} t={t} />
+        <PlansSection plans={plans} t={t} />
+      )}
+
+      {products.length > 0 && (
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-gray-900">
+            {t("products")}
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+              >
+                <h3 className="font-semibold text-gray-900">{product.name}</h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  {product.credits} {t("credits")}
+                </p>
+                {product.prices[0] && (
+                  <p className="mt-2 text-2xl font-bold text-gray-900">
+                    ${(product.prices[0].amount / 100).toFixed(0)}
+                  </p>
+                )}
+                {product.prices[0] && (
+                  <div className="mt-4">
+                    <CheckoutButton
+                      planPriceId={product.prices[0].stripePriceId}
+                    >
+                      {t("buy")}
+                    </CheckoutButton>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
 }
 
-async function NoSubscription({
-  orgId,
+function PlansSection({
+  plans,
   t,
 }: {
-  orgId?: string;
+  plans: Plan[];
   t: Awaited<ReturnType<typeof getTranslations<"billing">>>;
 }) {
-  let plans: PricingTableProps["plans"] = [];
-  try {
-    const fetched = await new ListPlans(planGateway).execute();
-    plans = fetched.map((plan) => {
-      const highlighted = plan.name.toLowerCase().includes("pro");
-      return {
-        name: plan.name,
-        price: plan.prices[0]
-          ? `$${(plan.prices[0].amount / 100).toFixed(0)}`
-          : "$0",
-        interval: plan.interval,
-        features: [] as string[],
-        highlighted,
-        cta: plan.prices[0] ? (
+  const planCards: PricingTableProps["plans"] = plans.map((plan) => {
+    const highlighted = plan.name.toLowerCase().includes("pro");
+    const unitPrice = plan.prices[0]?.amount ?? 0;
+    const isTeam = plan.context === "team";
+
+    return {
+      name: plan.name,
+      price: plan.prices[0] ? `$${(unitPrice / 100).toFixed(0)}` : "$0",
+      interval: isTeam ? `${t("perSeat")}/${plan.interval}` : plan.interval,
+      description: plan.description,
+      highlighted,
+      cta: plan.prices[0] ? (
+        isTeam ? (
+          <TeamCheckoutButton
+            planPriceId={plan.prices[0].stripePriceId}
+            unitPrice={unitPrice}
+            interval={plan.interval}
+            highlighted={highlighted}
+            seatLabel={t("seat")}
+            seatsLabel={t("seats")}
+            perSeatLabel={t("perSeat")}
+          >
+            {t("upgrade")}
+          </TeamCheckoutButton>
+        ) : (
           <CheckoutButton
             planPriceId={plan.prices[0].stripePriceId}
-            orgId={orgId}
             highlighted={highlighted}
           >
             {t("upgrade")}
           </CheckoutButton>
-        ) : (
-          <span />
-        ),
-      };
-    });
-  } catch (err) {
-    console.error("Failed to fetch plans", err);
-    plans = [];
-  }
+        )
+      ) : (
+        <span />
+      ),
+    };
+  });
 
-  if (plans.length === 0) {
+  if (planCards.length === 0) {
     return <p className="text-sm text-gray-500">{t("changePlan")}</p>;
   }
 
-  return <PricingTable plans={plans} />;
+  return <PricingTable plans={planCards} />;
 }

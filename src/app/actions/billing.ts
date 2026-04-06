@@ -5,30 +5,29 @@ import { StartCheckout } from "@/application/use-cases/billing/StartCheckout";
 import { OpenBillingPortal } from "@/application/use-cases/billing/OpenBillingPortal";
 import { subscriptionGateway } from "@/infrastructure/registry";
 
-const trustedHosts = ["checkout.stripe.com", "billing.stripe.com"];
-
-function assertTrustedRedirect(url: string): void {
-  const parsed = new URL(url);
-  if (!trustedHosts.includes(parsed.hostname)) {
-    throw new Error("Untrusted redirect URL");
-  }
-}
+const APP_ORIGIN = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
 export async function startCheckout(formData: FormData) {
   const planPriceId = formData.get("planPriceId");
-  const orgId = formData.get("orgId");
+  const quantityRaw = formData.get("quantity");
 
   if (typeof planPriceId !== "string") {
     return;
   }
 
+  const quantity =
+    typeof quantityRaw === "string" && quantityRaw
+      ? parseInt(quantityRaw, 10)
+      : undefined;
+
   let url: string;
   try {
     ({ url } = await new StartCheckout(subscriptionGateway).execute({
       planPriceId,
-      ...(typeof orgId === "string" && orgId ? { orgId } : {}),
+      ...(quantity && quantity > 0 ? { quantity } : {}),
+      successUrl: `${APP_ORIGIN}/billing?status=success`,
+      cancelUrl: `${APP_ORIGIN}/billing`,
     }));
-    assertTrustedRedirect(url);
   } catch (err) {
     if (err instanceof Error && err.message === "NEXT_REDIRECT") throw err;
     console.error("Failed to start checkout", err);
@@ -37,15 +36,12 @@ export async function startCheckout(formData: FormData) {
   redirect(url);
 }
 
-export async function openBillingPortal(formData: FormData) {
-  const orgId = formData.get("orgId");
-
+export async function openBillingPortal() {
   let url: string;
   try {
     ({ url } = await new OpenBillingPortal(subscriptionGateway).execute({
-      ...(typeof orgId === "string" && orgId ? { orgId } : {}),
+      returnUrl: `${APP_ORIGIN}/billing`,
     }));
-    assertTrustedRedirect(url);
   } catch (err) {
     if (err instanceof Error && err.message === "NEXT_REDIRECT") throw err;
     console.error("Failed to open billing portal", err);

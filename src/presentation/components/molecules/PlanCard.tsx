@@ -4,7 +4,8 @@ export interface PlanCardProps {
   name: string;
   price: string;
   interval: string;
-  features: string[];
+  description?: string;
+  features?: string[];
   highlighted?: boolean;
   highlightLabel?: string;
   cta: React.ReactNode;
@@ -15,7 +16,8 @@ export function PlanCard({
   name,
   price,
   interval,
-  features,
+  description,
+  features = [],
   highlighted = false,
   highlightLabel,
   cta,
@@ -39,30 +41,35 @@ export function PlanCard({
         <span className="text-4xl font-bold text-gray-900">{price}</span>
         <span className="text-sm text-gray-500">/{interval}</span>
       </p>
-      <ul className="mt-6 space-y-3">
-        {features.map((feature) => (
-          <li
-            key={feature}
-            className="flex items-start gap-2 text-sm text-gray-600"
-          >
-            <svg
-              className="text-primary-500 mt-0.5 h-4 w-4 shrink-0"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2.5}
-              stroke="currentColor"
-              aria-hidden="true"
+      {description && (
+        <p className="mt-4 text-sm text-gray-500">{description}</p>
+      )}
+      {features.length > 0 && (
+        <ul className="mt-6 space-y-3">
+          {features.map((feature) => (
+            <li
+              key={feature}
+              className="flex items-start gap-2 text-sm text-gray-600"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4.5 12.75l6 6 9-13.5"
-              />
-            </svg>
-            {feature}
-          </li>
-        ))}
-      </ul>
+              <svg
+                className="text-primary-500 mt-0.5 h-4 w-4 shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                />
+              </svg>
+              {feature}
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="mt-8">{cta}</div>
     </div>
   );
