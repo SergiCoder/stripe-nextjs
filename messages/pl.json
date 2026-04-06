@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "Funkcje",
-    "pricing": "Cennik",
     "blog": "Blog",
     "getStarted": "Rozpocznij",
     "dashboard": "Panel",
@@ -156,12 +155,19 @@
     "title": "Płatności",
     "currentPlan": "Aktualny plan",
     "upgrade": "Uaktualnij",
-    "cancel": "Anuluj subskrypcję",
+    "cancel": "Subskrypcja zostanie anulowana na koniec okresu",
     "changePlan": "Zmień plan",
     "applyPromo": "Zastosuj kod promocyjny",
     "portal": "Zarządzaj płatnościami",
     "success": "Płatność powiodła się!",
-    "successDesc": "Twoja subskrypcja została zaktualizowana."
+    "successDesc": "Twoja subskrypcja została zaktualizowana.",
+    "periodEnd": "Bieżący okres kończy się",
+    "seat": "miejsce",
+    "seats": "miejsca",
+    "products": "Pakiety kredytów",
+    "credits": "kredyty",
+    "buy": "Kup",
+    "perSeat": "za miejsce"
   },
   "settings": {
     "title": "Ustawienia",
@@ -227,32 +233,6 @@
     "confirm": "Potwierdź",
     "toggleNav": "Przełącz nawigację",
     "dismiss": "Zamknij"
-  },
-  "pricing": {
-    "pageTitle": "Cennik",
-    "interval": "miesiąc",
-    "mostPopular": "Najpopularniejszy",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "Do 5 użytkowników",
-    "starterFeature2": "1 GB przestrzeni",
-    "starterFeature3": "Wsparcie społeczności",
-    "starterFeature4": "Podstawowa analityka",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "Do 50 użytkowników",
-    "proFeature2": "25 GB przestrzeni",
-    "proFeature3": "Priorytetowe wsparcie e-mail",
-    "proFeature4": "Zaawansowana analityka",
-    "proFeature5": "Dostęp do API",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "Nieograniczona liczba użytkowników",
-    "enterpriseFeature2": "Nieograniczona przestrzeń",
-    "enterpriseFeature3": "SSO i SAML",
-    "enterpriseFeature4": "Dedykowane wsparcie",
-    "enterpriseFeature5": "Dzienniki audytu",
-    "enterpriseFeature6": "Niestandardowe integracje"
   },
   "contact": {
     "title": "Kontakt",

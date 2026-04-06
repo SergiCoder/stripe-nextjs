@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "功能",
-    "pricing": "定價",
     "blog": "Blog",
     "getStarted": "開始使用",
     "dashboard": "儀表板",
@@ -156,12 +155,19 @@
     "title": "帳單",
     "currentPlan": "目前方案",
     "upgrade": "升級",
-    "cancel": "取消訂閱",
+    "cancel": "訂閱將在當前週期結束時取消",
     "changePlan": "變更方案",
     "applyPromo": "使用促銷代碼",
     "portal": "管理帳單",
     "success": "付款成功！",
-    "successDesc": "您的訂閱已更新。"
+    "successDesc": "您的訂閱已更新。",
+    "periodEnd": "當前週期結束於",
+    "seat": "席位",
+    "seats": "席位",
+    "products": "點數包",
+    "credits": "點數",
+    "buy": "購買",
+    "perSeat": "每席"
   },
   "settings": {
     "title": "設定",
@@ -227,32 +233,6 @@
     "confirm": "確認",
     "toggleNav": "切換導覽",
     "dismiss": "關閉"
-  },
-  "pricing": {
-    "pageTitle": "定價",
-    "interval": "月",
-    "mostPopular": "最受歡迎",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "最多 5 名使用者",
-    "starterFeature2": "1 GB 儲存空間",
-    "starterFeature3": "社群支援",
-    "starterFeature4": "基礎分析",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "最多 50 名使用者",
-    "proFeature2": "25 GB 儲存空間",
-    "proFeature3": "優先電子郵件支援",
-    "proFeature4": "進階分析",
-    "proFeature5": "API 存取",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "無限使用者",
-    "enterpriseFeature2": "無限儲存",
-    "enterpriseFeature3": "SSO與SAML",
-    "enterpriseFeature4": "專屬支援",
-    "enterpriseFeature5": "稽核日誌",
-    "enterpriseFeature6": "自訂整合"
   },
   "contact": {
     "title": "聯絡我們",

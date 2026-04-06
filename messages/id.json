@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "Fitur",
-    "pricing": "Harga",
     "blog": "Blog",
     "getStarted": "Mulai",
     "dashboard": "Dasbor",
@@ -156,12 +155,19 @@
     "title": "Tagihan",
     "currentPlan": "Paket saat ini",
     "upgrade": "Tingkatkan",
-    "cancel": "Batalkan langganan",
+    "cancel": "Langganan akan dibatalkan pada akhir periode",
     "changePlan": "Ubah paket",
     "applyPromo": "Terapkan kode promo",
     "portal": "Kelola tagihan",
     "success": "Pembayaran berhasil!",
-    "successDesc": "Langganan Anda telah diperbarui."
+    "successDesc": "Langganan Anda telah diperbarui.",
+    "periodEnd": "Periode saat ini berakhir",
+    "seat": "kursi",
+    "seats": "kursi",
+    "products": "Paket kredit",
+    "credits": "kredit",
+    "buy": "Beli",
+    "perSeat": "per kursi"
   },
   "settings": {
     "title": "Pengaturan",
@@ -227,32 +233,6 @@
     "confirm": "Konfirmasi",
     "toggleNav": "Alihkan navigasi",
     "dismiss": "Tutup"
-  },
-  "pricing": {
-    "pageTitle": "Harga",
-    "interval": "bulan",
-    "mostPopular": "Paling populer",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "Hingga 5 pengguna",
-    "starterFeature2": "1 GB penyimpanan",
-    "starterFeature3": "Dukungan komunitas",
-    "starterFeature4": "Analitik dasar",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "Hingga 50 pengguna",
-    "proFeature2": "25 GB penyimpanan",
-    "proFeature3": "Dukungan email prioritas",
-    "proFeature4": "Analitik lanjutan",
-    "proFeature5": "Akses API",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "Pengguna tak terbatas",
-    "enterpriseFeature2": "Penyimpanan tak terbatas",
-    "enterpriseFeature3": "SSO & SAML",
-    "enterpriseFeature4": "Dukungan khusus",
-    "enterpriseFeature5": "Log audit",
-    "enterpriseFeature6": "Integrasi kustom"
   },
   "contact": {
     "title": "Hubungi kami",

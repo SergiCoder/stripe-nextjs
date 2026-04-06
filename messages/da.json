@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "Funktioner",
-    "pricing": "Priser",
     "blog": "Blog",
     "getStarted": "Kom i gang",
     "dashboard": "Dashboard",
@@ -156,12 +155,19 @@
     "title": "Fakturering",
     "currentPlan": "Nuværende plan",
     "upgrade": "Opgrader",
-    "cancel": "Annuller abonnement",
+    "cancel": "Abonnementet annulleres ved periodens udløb",
     "changePlan": "Skift plan",
     "applyPromo": "Brug kampagnekode",
     "portal": "Administrer fakturering",
     "success": "Betaling gennemført!",
-    "successDesc": "Dit abonnement er blevet opdateret."
+    "successDesc": "Dit abonnement er blevet opdateret.",
+    "periodEnd": "Nuværende periode slutter",
+    "seat": "plads",
+    "seats": "pladser",
+    "products": "Kreditpakker",
+    "credits": "kreditter",
+    "buy": "Køb",
+    "perSeat": "pr. plads"
   },
   "settings": {
     "title": "Indstillinger",
@@ -227,32 +233,6 @@
     "confirm": "Bekræft",
     "toggleNav": "Skift navigation",
     "dismiss": "Luk"
-  },
-  "pricing": {
-    "pageTitle": "Priser",
-    "interval": "måned",
-    "mostPopular": "Mest populær",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "Op til 5 brugere",
-    "starterFeature2": "1 GB lagerplads",
-    "starterFeature3": "Community-support",
-    "starterFeature4": "Grundlæggende analyse",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "Op til 50 brugere",
-    "proFeature2": "25 GB lagerplads",
-    "proFeature3": "Prioriteret e-mailsupport",
-    "proFeature4": "Avanceret analyse",
-    "proFeature5": "API-adgang",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "Ubegrænsede brugere",
-    "enterpriseFeature2": "Ubegrænset lagerplads",
-    "enterpriseFeature3": "SSO & SAML",
-    "enterpriseFeature4": "Dedikeret support",
-    "enterpriseFeature5": "Revisionslogge",
-    "enterpriseFeature6": "Tilpassede integrationer"
   },
   "contact": {
     "title": "Kontakt os",

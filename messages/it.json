@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "Funzionalità",
-    "pricing": "Prezzi",
     "blog": "Blog",
     "getStarted": "Inizia",
     "dashboard": "Dashboard",
@@ -156,12 +155,19 @@
     "title": "Fatturazione",
     "currentPlan": "Piano attuale",
     "upgrade": "Aggiorna",
-    "cancel": "Annulla abbonamento",
+    "cancel": "L'abbonamento verrà annullato alla fine del periodo",
     "changePlan": "Cambia piano",
     "applyPromo": "Applica codice promozionale",
     "portal": "Gestisci fatturazione",
     "success": "Pagamento riuscito!",
-    "successDesc": "Il tuo abbonamento è stato aggiornato."
+    "successDesc": "Il tuo abbonamento è stato aggiornato.",
+    "periodEnd": "Il periodo attuale termina",
+    "seat": "posto",
+    "seats": "posti",
+    "products": "Pacchetti crediti",
+    "credits": "crediti",
+    "buy": "Acquista",
+    "perSeat": "per posto"
   },
   "settings": {
     "title": "Impostazioni",
@@ -227,32 +233,6 @@
     "confirm": "Conferma",
     "toggleNav": "Attiva/disattiva navigazione",
     "dismiss": "Chiudi"
-  },
-  "pricing": {
-    "pageTitle": "Prezzi",
-    "interval": "mese",
-    "mostPopular": "Più popolare",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "Fino a 5 utenti",
-    "starterFeature2": "1 GB di archiviazione",
-    "starterFeature3": "Supporto community",
-    "starterFeature4": "Analisi di base",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "Fino a 50 utenti",
-    "proFeature2": "25 GB di archiviazione",
-    "proFeature3": "Supporto prioritario via email",
-    "proFeature4": "Analisi avanzate",
-    "proFeature5": "Accesso API",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "Utenti illimitati",
-    "enterpriseFeature2": "Archiviazione illimitata",
-    "enterpriseFeature3": "SSO e SAML",
-    "enterpriseFeature4": "Supporto dedicato",
-    "enterpriseFeature5": "Log di audit",
-    "enterpriseFeature6": "Integrazioni personalizzate"
   },
   "contact": {
     "title": "Contattaci",

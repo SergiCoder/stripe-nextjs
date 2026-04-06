@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "Features",
-    "pricing": "Pricing",
     "blog": "Blog",
     "getStarted": "Get started",
     "dashboard": "Dashboard",
@@ -156,12 +155,19 @@
     "title": "Billing",
     "currentPlan": "Current Plan",
     "upgrade": "Upgrade",
-    "cancel": "Cancel subscription",
+    "cancel": "Subscription will cancel at end of period",
     "changePlan": "Change plan",
     "applyPromo": "Apply promo code",
     "portal": "Manage billing",
     "success": "Payment successful!",
-    "successDesc": "Your subscription has been updated."
+    "successDesc": "Your subscription has been updated.",
+    "periodEnd": "Current period ends",
+    "seat": "seat",
+    "seats": "seats",
+    "products": "Credit packs",
+    "credits": "credits",
+    "buy": "Buy",
+    "perSeat": "per seat"
   },
   "settings": {
     "title": "Settings",
@@ -227,32 +233,6 @@
     "confirm": "Confirm",
     "toggleNav": "Toggle navigation",
     "dismiss": "Dismiss"
-  },
-  "pricing": {
-    "pageTitle": "Pricing",
-    "interval": "month",
-    "mostPopular": "Most popular",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "Up to 5 users",
-    "starterFeature2": "1 GB storage",
-    "starterFeature3": "Community support",
-    "starterFeature4": "Basic analytics",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "Up to 50 users",
-    "proFeature2": "25 GB storage",
-    "proFeature3": "Priority email support",
-    "proFeature4": "Advanced analytics",
-    "proFeature5": "API access",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "Unlimited users",
-    "enterpriseFeature2": "Unlimited storage",
-    "enterpriseFeature3": "SSO & SAML",
-    "enterpriseFeature4": "Dedicated support",
-    "enterpriseFeature5": "Audit logs",
-    "enterpriseFeature6": "Custom integrations"
   },
   "contact": {
     "title": "Contact us",

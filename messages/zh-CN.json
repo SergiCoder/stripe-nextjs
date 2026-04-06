@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "功能",
-    "pricing": "定价",
     "blog": "Blog",
     "getStarted": "开始使用",
     "dashboard": "仪表盘",
@@ -156,12 +155,19 @@
     "title": "账单",
     "currentPlan": "当前方案",
     "upgrade": "升级",
-    "cancel": "取消订阅",
+    "cancel": "订阅将在当前周期结束时取消",
     "changePlan": "更改方案",
     "applyPromo": "使用促销代码",
     "portal": "管理账单",
     "success": "支付成功！",
-    "successDesc": "您的订阅已更新。"
+    "successDesc": "您的订阅已更新。",
+    "periodEnd": "当前周期结束于",
+    "seat": "席位",
+    "seats": "席位",
+    "products": "积分包",
+    "credits": "积分",
+    "buy": "购买",
+    "perSeat": "每席"
   },
   "settings": {
     "title": "设置",
@@ -227,32 +233,6 @@
     "confirm": "确认",
     "toggleNav": "切换导航",
     "dismiss": "关闭"
-  },
-  "pricing": {
-    "pageTitle": "定价",
-    "interval": "月",
-    "mostPopular": "最受欢迎",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "最多 5 名用户",
-    "starterFeature2": "1 GB 存储空间",
-    "starterFeature3": "社区支持",
-    "starterFeature4": "基础分析",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "最多 50 名用户",
-    "proFeature2": "25 GB 存储空间",
-    "proFeature3": "优先邮件支持",
-    "proFeature4": "高级分析",
-    "proFeature5": "API 访问",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "无限用户",
-    "enterpriseFeature2": "无限存储",
-    "enterpriseFeature3": "SSO和SAML",
-    "enterpriseFeature4": "专属支持",
-    "enterpriseFeature5": "审计日志",
-    "enterpriseFeature6": "自定义集成"
   },
   "contact": {
     "title": "联系我们",

@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "Funcionalidades",
-    "pricing": "Preços",
     "blog": "Blog",
     "getStarted": "Começar",
     "dashboard": "Painel",
@@ -156,12 +155,19 @@
     "title": "Faturação",
     "currentPlan": "Plano atual",
     "upgrade": "Atualizar",
-    "cancel": "Cancelar subscrição",
+    "cancel": "A subscrição será cancelada no final do período",
     "changePlan": "Alterar plano",
     "applyPromo": "Aplicar código promocional",
     "portal": "Gerir faturação",
     "success": "Pagamento efetuado!",
-    "successDesc": "A sua subscrição foi atualizada."
+    "successDesc": "A sua subscrição foi atualizada.",
+    "periodEnd": "O período atual termina",
+    "seat": "lugar",
+    "seats": "lugares",
+    "products": "Pacotes de créditos",
+    "credits": "créditos",
+    "buy": "Comprar",
+    "perSeat": "por lugar"
   },
   "settings": {
     "title": "Definições",
@@ -227,32 +233,6 @@
     "confirm": "Confirmar",
     "toggleNav": "Alternar navegação",
     "dismiss": "Fechar"
-  },
-  "pricing": {
-    "pageTitle": "Preços",
-    "interval": "mês",
-    "mostPopular": "Mais popular",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "Até 5 utilizadores",
-    "starterFeature2": "1 GB de armazenamento",
-    "starterFeature3": "Suporte comunitário",
-    "starterFeature4": "Análises básicas",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "Até 50 utilizadores",
-    "proFeature2": "25 GB de armazenamento",
-    "proFeature3": "Suporte prioritário por e-mail",
-    "proFeature4": "Análises avançadas",
-    "proFeature5": "Acesso à API",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "Utilizadores ilimitados",
-    "enterpriseFeature2": "Armazenamento ilimitado",
-    "enterpriseFeature3": "SSO e SAML",
-    "enterpriseFeature4": "Suporte dedicado",
-    "enterpriseFeature5": "Registos de auditoria",
-    "enterpriseFeature6": "Integrações personalizadas"
   },
   "contact": {
     "title": "Contacte-nos",

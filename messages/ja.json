@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "機能",
-    "pricing": "料金",
     "blog": "Blog",
     "getStarted": "始める",
     "dashboard": "ダッシュボード",
@@ -156,12 +155,19 @@
     "title": "請求",
     "currentPlan": "現在のプラン",
     "upgrade": "アップグレード",
-    "cancel": "サブスクリプションを解約",
+    "cancel": "サブスクリプションは期間終了時に解約されます",
     "changePlan": "プランを変更",
     "applyPromo": "プロモコードを適用",
     "portal": "請求を管理",
     "success": "お支払い完了！",
-    "successDesc": "サブスクリプションが更新されました。"
+    "successDesc": "サブスクリプションが更新されました。",
+    "periodEnd": "現在の期間の終了日",
+    "seat": "シート",
+    "seats": "シート",
+    "products": "クレジットパック",
+    "credits": "クレジット",
+    "buy": "購入",
+    "perSeat": "1席あたり"
   },
   "settings": {
     "title": "設定",
@@ -227,32 +233,6 @@
     "confirm": "確認",
     "toggleNav": "ナビゲーション切替",
     "dismiss": "閉じる"
-  },
-  "pricing": {
-    "pageTitle": "料金プラン",
-    "interval": "月",
-    "mostPopular": "一番人気",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "最大5ユーザー",
-    "starterFeature2": "1 GBストレージ",
-    "starterFeature3": "コミュニティサポート",
-    "starterFeature4": "基本分析",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "最大50ユーザー",
-    "proFeature2": "25 GBストレージ",
-    "proFeature3": "優先メールサポート",
-    "proFeature4": "高度な分析",
-    "proFeature5": "APIアクセス",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "無制限ユーザー",
-    "enterpriseFeature2": "無制限ストレージ",
-    "enterpriseFeature3": "SSO & SAML",
-    "enterpriseFeature4": "専任サポート",
-    "enterpriseFeature5": "監査ログ",
-    "enterpriseFeature6": "カスタム連携"
   },
   "contact": {
     "title": "お問い合わせ",

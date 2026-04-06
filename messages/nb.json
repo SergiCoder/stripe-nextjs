@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "Funksjoner",
-    "pricing": "Priser",
     "blog": "Blog",
     "getStarted": "Kom i gang",
     "dashboard": "Dashboard",
@@ -156,12 +155,19 @@
     "title": "Fakturering",
     "currentPlan": "Nåværende plan",
     "upgrade": "Oppgrader",
-    "cancel": "Avbryt abonnement",
+    "cancel": "Abonnementet avsluttes ved periodens slutt",
     "changePlan": "Endre plan",
     "applyPromo": "Bruk kampanjekode",
     "portal": "Administrer fakturering",
     "success": "Betaling vellykket!",
-    "successDesc": "Abonnementet ditt er oppdatert."
+    "successDesc": "Abonnementet ditt er oppdatert.",
+    "periodEnd": "Nåværende periode slutter",
+    "seat": "plass",
+    "seats": "plasser",
+    "products": "Kredittpakker",
+    "credits": "kreditter",
+    "buy": "Kjøp",
+    "perSeat": "per plass"
   },
   "settings": {
     "title": "Innstillinger",
@@ -227,32 +233,6 @@
     "confirm": "Bekreft",
     "toggleNav": "Veksle navigasjon",
     "dismiss": "Lukk"
-  },
-  "pricing": {
-    "pageTitle": "Priser",
-    "interval": "måned",
-    "mostPopular": "Mest populær",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "Opptil 5 brukere",
-    "starterFeature2": "1 GB lagring",
-    "starterFeature3": "Fellesskapsstøtte",
-    "starterFeature4": "Grunnleggende analyse",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "Opptil 50 brukere",
-    "proFeature2": "25 GB lagring",
-    "proFeature3": "Prioritert e-poststotte",
-    "proFeature4": "Avansert analyse",
-    "proFeature5": "API-tilgang",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "Ubegrensede brukere",
-    "enterpriseFeature2": "Ubegrenset lagring",
-    "enterpriseFeature3": "SSO og SAML",
-    "enterpriseFeature4": "Dedikert stotte",
-    "enterpriseFeature5": "Revisjonslogger",
-    "enterpriseFeature6": "Tilpassede integrasjoner"
   },
   "contact": {
     "title": "Kontakt oss",

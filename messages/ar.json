@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "الميزات",
-    "pricing": "الأسعار",
     "blog": "Blog",
     "getStarted": "ابدأ الآن",
     "dashboard": "لوحة التحكم",
@@ -156,12 +155,19 @@
     "title": "الفوترة",
     "currentPlan": "الخطة الحالية",
     "upgrade": "ترقية",
-    "cancel": "إلغاء الاشتراك",
+    "cancel": "سيتم إلغاء الاشتراك في نهاية الفترة",
     "changePlan": "تغيير الخطة",
     "applyPromo": "تطبيق رمز ترويجي",
     "portal": "إدارة الفوترة",
     "success": "تم الدفع بنجاح!",
-    "successDesc": "تم تحديث اشتراكك."
+    "successDesc": "تم تحديث اشتراكك.",
+    "periodEnd": "تنتهي الفترة الحالية",
+    "seat": "مقعد",
+    "seats": "مقاعد",
+    "products": "حزم الرصيد",
+    "credits": "أرصدة",
+    "buy": "شراء",
+    "perSeat": "لكل مقعد"
   },
   "settings": {
     "title": "الإعدادات",
@@ -227,32 +233,6 @@
     "confirm": "تأكيد",
     "toggleNav": "تبديل التنقل",
     "dismiss": "إغلاق"
-  },
-  "pricing": {
-    "pageTitle": "الأسعار",
-    "interval": "شهر",
-    "mostPopular": "الأكثر شعبية",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "حتى 5 مستخدمين",
-    "starterFeature2": "1 GB تخزين",
-    "starterFeature3": "دعم المجتمع",
-    "starterFeature4": "تحليلات أساسية",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "حتى 50 مستخدماً",
-    "proFeature2": "25 GB تخزين",
-    "proFeature3": "دعم بريد إلكتروني ذو أولوية",
-    "proFeature4": "تحليلات متقدمة",
-    "proFeature5": "وصول API",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "مستخدمون غير محدودين",
-    "enterpriseFeature2": "تخزين غير محدود",
-    "enterpriseFeature3": "SSO و SAML",
-    "enterpriseFeature4": "دعم مخصص",
-    "enterpriseFeature5": "سجلات التدقيق",
-    "enterpriseFeature6": "تكاملات مخصصة"
   },
   "contact": {
     "title": "اتصل بنا",

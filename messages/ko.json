@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "기능",
-    "pricing": "요금제",
     "blog": "Blog",
     "getStarted": "시작하기",
     "dashboard": "대시보드",
@@ -156,12 +155,19 @@
     "title": "결제",
     "currentPlan": "현재 플랜",
     "upgrade": "업그레이드",
-    "cancel": "구독 취소",
+    "cancel": "구독은 기간 종료 시 취소됩니다",
     "changePlan": "플랜 변경",
     "applyPromo": "프로모 코드 적용",
     "portal": "결제 관리",
     "success": "결제 완료!",
-    "successDesc": "구독이 업데이트되었습니다."
+    "successDesc": "구독이 업데이트되었습니다.",
+    "periodEnd": "현재 기간 종료일",
+    "seat": "좌석",
+    "seats": "좌석",
+    "products": "크레딧 팩",
+    "credits": "크레딧",
+    "buy": "구매",
+    "perSeat": "좌석당"
   },
   "settings": {
     "title": "설정",
@@ -227,32 +233,6 @@
     "confirm": "확인",
     "toggleNav": "내비게이션 전환",
     "dismiss": "닫기"
-  },
-  "pricing": {
-    "pageTitle": "요금제",
-    "interval": "월",
-    "mostPopular": "가장 인기",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "최대 5명",
-    "starterFeature2": "1 GB 스토리지",
-    "starterFeature3": "커뮤니티 지원",
-    "starterFeature4": "기본 분석",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "최대 50명",
-    "proFeature2": "25 GB 스토리지",
-    "proFeature3": "우선 이메일 지원",
-    "proFeature4": "고급 분석",
-    "proFeature5": "API 액세스",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "무제한 사용자",
-    "enterpriseFeature2": "무제한 스토리지",
-    "enterpriseFeature3": "SSO & SAML",
-    "enterpriseFeature4": "전담 지원",
-    "enterpriseFeature5": "감사 로그",
-    "enterpriseFeature6": "커스텀 연동"
   },
   "contact": {
     "title": "문의하기",

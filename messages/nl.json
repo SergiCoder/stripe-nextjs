@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "Functies",
-    "pricing": "Prijzen",
     "blog": "Blog",
     "getStarted": "Aan de slag",
     "dashboard": "Dashboard",
@@ -156,12 +155,19 @@
     "title": "Facturering",
     "currentPlan": "Huidig abonnement",
     "upgrade": "Upgraden",
-    "cancel": "Abonnement opzeggen",
+    "cancel": "Abonnement wordt opgezegd aan het einde van de periode",
     "changePlan": "Abonnement wijzigen",
     "applyPromo": "Promotiecode toepassen",
     "portal": "Facturering beheren",
     "success": "Betaling geslaagd!",
-    "successDesc": "Uw abonnement is bijgewerkt."
+    "successDesc": "Uw abonnement is bijgewerkt.",
+    "periodEnd": "Huidige periode eindigt",
+    "seat": "stoel",
+    "seats": "stoelen",
+    "products": "Creditpakketten",
+    "credits": "credits",
+    "buy": "Kopen",
+    "perSeat": "per stoel"
   },
   "settings": {
     "title": "Instellingen",
@@ -227,32 +233,6 @@
     "confirm": "Bevestigen",
     "toggleNav": "Navigatie wisselen",
     "dismiss": "Sluiten"
-  },
-  "pricing": {
-    "pageTitle": "Prijzen",
-    "interval": "maand",
-    "mostPopular": "Meest populair",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "Tot 5 gebruikers",
-    "starterFeature2": "1 GB opslag",
-    "starterFeature3": "Community-ondersteuning",
-    "starterFeature4": "Basisanalyse",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "Tot 50 gebruikers",
-    "proFeature2": "25 GB opslag",
-    "proFeature3": "Prioriteits-e-mailondersteuning",
-    "proFeature4": "Geavanceerde analyse",
-    "proFeature5": "API-toegang",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "Onbeperkt aantal gebruikers",
-    "enterpriseFeature2": "Onbeperkte opslag",
-    "enterpriseFeature3": "SSO & SAML",
-    "enterpriseFeature4": "Toegewezen ondersteuning",
-    "enterpriseFeature5": "Auditlogs",
-    "enterpriseFeature6": "Aangepaste integraties"
   },
   "contact": {
     "title": "Contact",

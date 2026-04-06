@@ -1,7 +1,6 @@
 {
   "nav": {
     "features": "Özellikler",
-    "pricing": "Fiyatlandırma",
     "blog": "Blog",
     "getStarted": "Başlayın",
     "dashboard": "Kontrol paneli",
@@ -156,12 +155,19 @@
     "title": "Faturalandırma",
     "currentPlan": "Mevcut plan",
     "upgrade": "Yükselt",
-    "cancel": "Aboneliği iptal et",
+    "cancel": "Abonelik dönem sonunda iptal edilecek",
     "changePlan": "Plan değiştir",
     "applyPromo": "Promosyon kodu uygula",
     "portal": "Faturalandırmayı yönet",
     "success": "Ödeme başarılı!",
-    "successDesc": "Aboneliğiniz güncellendi."
+    "successDesc": "Aboneliğiniz güncellendi.",
+    "periodEnd": "Mevcut dönem sona eriyor",
+    "seat": "koltuk",
+    "seats": "koltuk",
+    "products": "Kredi paketleri",
+    "credits": "kredi",
+    "buy": "Satın al",
+    "perSeat": "kişi başına"
   },
   "settings": {
     "title": "Ayarlar",
@@ -227,32 +233,6 @@
     "confirm": "Onayla",
     "toggleNav": "Gezinmeyi aç/kapat",
     "dismiss": "Kapat"
-  },
-  "pricing": {
-    "pageTitle": "Fiyatlandırma",
-    "interval": "ay",
-    "mostPopular": "En popüler",
-    "starterName": "Starter",
-    "starterPrice": "$0",
-    "starterFeature1": "5 kullanıcıya kadar",
-    "starterFeature2": "1 GB depolama",
-    "starterFeature3": "Topluluk desteği",
-    "starterFeature4": "Temel analitik",
-    "proName": "Pro",
-    "proPrice": "$29",
-    "proFeature1": "50 kullanıcıya kadar",
-    "proFeature2": "25 GB depolama",
-    "proFeature3": "Öncelikli e-posta desteği",
-    "proFeature4": "Gelişmiş analitik",
-    "proFeature5": "API erişimi",
-    "enterpriseName": "Enterprise",
-    "enterprisePrice": "$99",
-    "enterpriseFeature1": "Sınırsız kullanıcı",
-    "enterpriseFeature2": "Sınırsız depolama",
-    "enterpriseFeature3": "SSO ve SAML",
-    "enterpriseFeature4": "Özel destek",
-    "enterpriseFeature5": "Denetim günlükleri",
-    "enterpriseFeature6": "Özel entegrasyonlar"
   },
   "contact": {
     "title": "Bize ulaşın",
