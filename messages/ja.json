@@ -242,7 +242,8 @@
     "title": "お問い合わせ",
     "description": "ご質問やお困りのことがありますか？お気軽にご連絡ください。",
     "placeholder": "メールアドレス",
-    "submit": "送信"
+    "submit": "送信",
+    "messagePlaceholder": "メッセージ"
   },
   "about": {
     "title": "このプロジェクトについて",

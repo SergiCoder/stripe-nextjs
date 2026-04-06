@@ -242,7 +242,8 @@
     "title": "Kontakt",
     "description": "Masz pytanie lub potrzebujesz pomocy? Chętnie Cię wysłuchamy.",
     "placeholder": "Twój adres e-mail",
-    "submit": "Wyślij"
+    "submit": "Wyślij",
+    "messagePlaceholder": "Twoja wiadomość"
   },
   "about": {
     "title": "O tym projekcie",

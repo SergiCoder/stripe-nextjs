@@ -242,7 +242,8 @@
     "title": "문의하기",
     "description": "질문이 있거나 도움이 필요하신가요? 연락을 기다립니다.",
     "placeholder": "이메일 주소",
-    "submit": "보내기"
+    "submit": "보내기",
+    "messagePlaceholder": "메시지"
   },
   "about": {
     "title": "이 프로젝트 소개",

@@ -242,7 +242,8 @@
     "title": "Contact us",
     "description": "Have a question or need help? We'd love to hear from you.",
     "placeholder": "Your email address",
-    "submit": "Send"
+    "submit": "Send",
+    "messagePlaceholder": "Your message"
   },
   "about": {
     "title": "About this project",

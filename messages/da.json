@@ -242,7 +242,8 @@
     "title": "Kontakt os",
     "description": "Har du et spørgsmål eller brug for hjælp? Vi hører gerne fra dig.",
     "placeholder": "Din e-mailadresse",
-    "submit": "Send"
+    "submit": "Send",
+    "messagePlaceholder": "Din besked"
   },
   "about": {
     "title": "Om dette projekt",

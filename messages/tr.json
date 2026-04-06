@@ -242,7 +242,8 @@
     "title": "Bize ulaşın",
     "description": "Bir sorunuz mu var veya yardıma mı ihtiyacınız var? Sizden haber almak isteriz.",
     "placeholder": "E-posta adresiniz",
-    "submit": "Gönder"
+    "submit": "Gönder",
+    "messagePlaceholder": "Mesajınız"
   },
   "about": {
     "title": "Bu proje hakkında",

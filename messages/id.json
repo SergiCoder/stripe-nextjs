@@ -242,7 +242,8 @@
     "title": "Hubungi kami",
     "description": "Punya pertanyaan atau butuh bantuan? Kami senang mendengar dari Anda.",
     "placeholder": "Alamat email Anda",
-    "submit": "Kirim"
+    "submit": "Kirim",
+    "messagePlaceholder": "Pesan Anda"
   },
   "about": {
     "title": "Tentang proyek ini",

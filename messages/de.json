@@ -242,7 +242,8 @@
     "title": "Kontakt",
     "description": "Haben Sie eine Frage oder brauchen Sie Hilfe? Wir freuen uns auf Ihre Nachricht.",
     "placeholder": "Ihre E-Mail-Adresse",
-    "submit": "Senden"
+    "submit": "Senden",
+    "messagePlaceholder": "Ihre Nachricht"
   },
   "about": {
     "title": "Über dieses Projekt",

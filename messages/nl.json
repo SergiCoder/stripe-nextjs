@@ -242,7 +242,8 @@
     "title": "Contact",
     "description": "Heeft u een vraag of hulp nodig? We horen graag van u.",
     "placeholder": "Uw e-mailadres",
-    "submit": "Verzenden"
+    "submit": "Verzenden",
+    "messagePlaceholder": "Uw bericht"
   },
   "about": {
     "title": "Over dit project",

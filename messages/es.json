@@ -242,7 +242,8 @@
     "title": "Contacto",
     "description": "¿Tienes alguna pregunta o necesitas ayuda? Nos encantaría saber de ti.",
     "placeholder": "Tu dirección de correo electrónico",
-    "submit": "Enviar"
+    "submit": "Enviar",
+    "messagePlaceholder": "Tu mensaje"
   },
   "about": {
     "title": "Acerca de este proyecto",

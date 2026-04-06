@@ -242,7 +242,8 @@
     "title": "联系我们",
     "description": "有问题或需要帮助？我们很乐意听取您的反馈。",
     "placeholder": "您的电子邮件地址",
-    "submit": "发送"
+    "submit": "发送",
+    "messagePlaceholder": "您的留言"
   },
   "about": {
     "title": "关于本项目",

@@ -242,7 +242,8 @@
     "title": "Kontakta oss",
     "description": "Har du en fråga eller behöver hjälp? Vi vill gärna höra från dig.",
     "placeholder": "Din e-postadress",
-    "submit": "Skicka"
+    "submit": "Skicka",
+    "messagePlaceholder": "Ditt meddelande"
   },
   "about": {
     "title": "Om det här projektet",
