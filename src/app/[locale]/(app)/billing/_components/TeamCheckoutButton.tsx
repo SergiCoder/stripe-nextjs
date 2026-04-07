@@ -43,7 +43,7 @@ export function TeamCheckoutButton({
           value={quantity}
           onChange={(e) =>
             setQuantity(
-              Math.max(minSeats, parseInt(e.target.value) || minSeats),
+              Math.max(minSeats, parseInt(e.target.value, 10) || minSeats),
             )
           }
           className="w-20 text-center"

@@ -8,14 +8,13 @@ import {
   productGateway,
   subscriptionGateway,
 } from "@/infrastructure/registry";
-import {
-  PricingTable,
-  type PricingTableProps,
-} from "@/presentation/components/organisms/PricingTable";
+import { PricingTable } from "@/presentation/components/organisms/PricingTable";
+import { ProductsGrid } from "@/presentation/components/organisms/ProductsGrid";
 import { GetStartedButton } from "./_components/GetStartedButton";
 import { CheckoutButton } from "@/app/[locale]/(app)/billing/_components/CheckoutButton";
 import { TeamCheckoutButton } from "@/app/[locale]/(app)/billing/_components/TeamCheckoutButton";
 import { getOptionalUser } from "../_data/getOptionalUser";
+import { buildPlanCards } from "@/app/[locale]/_lib/buildPlanCards";
 import type { Plan } from "@/domain/models/Plan";
 import type { Product } from "@/domain/models/Product";
 
@@ -25,17 +24,18 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PricingPage() {
-  const [t, user] = await Promise.all([
+  const plansPromise = new ListPlans(planGateway)
+    .execute()
+    .catch((err): Plan[] => {
+      console.error("Failed to fetch plans", err);
+      return [];
+    });
+
+  const [t, user, plans] = await Promise.all([
     getTranslations("billing"),
     getOptionalUser(),
+    plansPromise,
   ]);
-
-  let plans: Plan[] = [];
-  try {
-    plans = await new ListPlans(planGateway).execute();
-  } catch (err) {
-    console.error("Failed to fetch plans", err);
-  }
 
   let currentPlanId: string | undefined;
   let products: Product[] = [];
@@ -47,70 +47,54 @@ export default async function PricingPage() {
       ]);
       currentPlanId = subscription?.plan;
       products = fetchedProducts;
-    } catch {
-      /* no subscription or products */
+    } catch (err) {
+      console.error("Failed to fetch subscription/products", err);
     }
   }
 
-  const currentPlan = plans.find((p) => p.id === currentPlanId);
-  const currentPrice = currentPlan?.price?.amount ?? 0;
-
-  const planCards: PricingTableProps["plans"] = plans.map((plan) => {
-    const highlighted = plan.name.toLowerCase().includes("pro");
-    const unitPrice = plan.price?.amount ?? 0;
-    const isTeam = plan.context === "team";
-    const isCurrent = Boolean(currentPlanId) && plan.id === currentPlanId;
-    const isUpgrade = unitPrice > currentPrice;
-
-    let cta: React.ReactNode;
-
-    if (!user) {
-      cta = plan.price ? (
-        <GetStartedButton
-          planPriceId={plan.price.id}
-          highlighted={highlighted}
-        >
-          {t("select")}
-        </GetStartedButton>
-      ) : (
-        <span />
-      );
-    } else if (isCurrent) {
-      cta = <span />;
-    } else if (plan.price) {
-      const ctaLabel = isUpgrade ? t("upgrade") : t("downgrade");
-      cta = isTeam ? (
-        <TeamCheckoutButton
-          planPriceId={plan.price.id}
-          unitPrice={unitPrice}
-          interval={plan.interval}
-          highlighted={highlighted}
-          seatLabel={t("seat")}
-          seatsLabel={t("seats")}
-          perSeatLabel={t("perSeat")}
-        >
-          {ctaLabel}
-        </TeamCheckoutButton>
-      ) : (
-        <CheckoutButton
-          planPriceId={plan.price.id}
-          highlighted={highlighted}
-        >
+  const planCards = buildPlanCards({
+    plans,
+    currentPlanId,
+    labels: {
+      upgrade: t("upgrade"),
+      downgrade: t("downgrade"),
+      perSeat: t("perSeat"),
+    },
+    renderCta: ({ plan, isCurrent, isTeam, unitPrice, ctaLabel }) => {
+      if (!plan.price) return null;
+      const highlighted = plan.name.toLowerCase().includes("pro");
+      if (!user) {
+        return (
+          <GetStartedButton
+            planPriceId={plan.price.id}
+            highlighted={highlighted}
+          >
+            {t("select")}
+          </GetStartedButton>
+        );
+      }
+      if (isCurrent) return null;
+      if (isTeam) {
+        return (
+          <TeamCheckoutButton
+            planPriceId={plan.price.id}
+            unitPrice={unitPrice}
+            interval={plan.interval}
+            highlighted={highlighted}
+            seatLabel={t("seat")}
+            seatsLabel={t("seats")}
+            perSeatLabel={t("perSeat")}
+          >
+            {ctaLabel}
+          </TeamCheckoutButton>
+        );
+      }
+      return (
+        <CheckoutButton planPriceId={plan.price.id} highlighted={highlighted}>
           {ctaLabel}
         </CheckoutButton>
       );
-    } else {
-      cta = <span />;
-    }
-
-    return {
-      name: plan.name,
-      price: plan.price ? `$${(unitPrice / 100).toFixed(0)}` : "$0",
-      interval: isTeam ? `${t("perSeat")}/${plan.interval}` : plan.interval,
-      description: plan.description,
-      highlighted,
-      cta,
-    };
+    },
   });
 
   if (planCards.length === 0) {
@@ -128,38 +112,19 @@ export default async function PricingPage() {
         <PricingTable plans={planCards} />
       </div>
 
-      {products.length > 0 && (
-        <div className="mt-16 space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900">
-            {t("products")}
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
-              >
-                <h3 className="font-semibold text-gray-900">{product.name}</h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  {product.credits} {t("credits")}
-                </p>
-                {product.price && (
-                  <p className="mt-2 text-2xl font-bold text-gray-900">
-                    ${(product.price.amount / 100).toFixed(0)}
-                  </p>
-                )}
-                {product.price && (
-                  <div className="mt-4">
-                    <CheckoutButton planPriceId={product.price.id}>
-                      {t("buy")}
-                    </CheckoutButton>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <ProductsGrid
+        className="mt-16"
+        title={t("products")}
+        products={products}
+        creditsLabel={t("credits")}
+        renderCta={(product) =>
+          product.price && (
+            <CheckoutButton planPriceId={product.price.id}>
+              {t("buy")}
+            </CheckoutButton>
+          )
+        }
+      />
     </div>
   );
 }
