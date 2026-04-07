@@ -9,7 +9,6 @@ const products: Product[] = [
     name: "Boost 1",
     type: "one_time",
     credits: 100,
-    isActive: true,
     price: {
       id: "pp1",
       amount: 999,

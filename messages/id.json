@@ -171,7 +171,15 @@
     "perSeat": "per kursi",
     "downgrade": "Turunkan",
     "getStarted": "Mulai",
-    "select": "Pilih"
+    "select": "Pilih",
+    "monthly": "Bulanan",
+    "yearly": "Tahunan",
+    "savingsBadge": "Hemat hingga {pct}%",
+    "personalPlans": "Paket personal",
+    "teamPlans": "Paket tim",
+    "personalPlansDesc": "Untuk individu.",
+    "teamPlansDesc": "Untuk tim dan organisasi.",
+    "pricingTitle": "Harga"
   },
   "settings": {
     "title": "Pengaturan",

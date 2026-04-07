@@ -9,8 +9,8 @@ const plans: Plan[] = [
     name: "Starter",
     description: "For individuals getting started.",
     context: "personal",
+    tier: "basic",
     interval: "month",
-    isActive: true,
     price: null,
   },
   {
@@ -18,8 +18,8 @@ const plans: Plan[] = [
     name: "Team",
     description: "For small teams.",
     context: "team",
+    tier: "pro",
     interval: "year",
-    isActive: true,
     price: null,
   },
 ];

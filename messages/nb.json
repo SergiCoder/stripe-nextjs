@@ -171,7 +171,15 @@
     "perSeat": "per plass",
     "downgrade": "Nedgrader",
     "getStarted": "Kom i gang",
-    "select": "Velg"
+    "select": "Velg",
+    "monthly": "Månedlig",
+    "yearly": "Årlig",
+    "savingsBadge": "Spar opptil {pct}%",
+    "personalPlans": "Personlige planer",
+    "teamPlans": "Teamplaner",
+    "personalPlansDesc": "For enkeltpersoner.",
+    "teamPlansDesc": "For team og organisasjoner.",
+    "pricingTitle": "Priser"
   },
   "settings": {
     "title": "Innstillinger",

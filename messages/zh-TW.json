@@ -171,7 +171,15 @@
     "perSeat": "每席",
     "downgrade": "降級",
     "getStarted": "開始使用",
-    "select": "選擇"
+    "select": "選擇",
+    "monthly": "每月",
+    "yearly": "每年",
+    "savingsBadge": "最多省{pct}%",
+    "personalPlans": "個人方案",
+    "teamPlans": "團隊方案",
+    "personalPlansDesc": "適合個人。",
+    "teamPlansDesc": "適合團隊與組織。",
+    "pricingTitle": "定價"
   },
   "settings": {
     "title": "設定",

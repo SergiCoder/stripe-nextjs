@@ -171,7 +171,15 @@
     "perSeat": "kişi başına",
     "downgrade": "Düşür",
     "getStarted": "Başlayın",
-    "select": "Seç"
+    "select": "Seç",
+    "monthly": "Aylık",
+    "yearly": "Yıllık",
+    "savingsBadge": "%{pct} kadar tasarruf",
+    "personalPlans": "Kişisel planlar",
+    "teamPlans": "Takım planları",
+    "personalPlansDesc": "Bireyler için.",
+    "teamPlansDesc": "Takımlar ve kuruluşlar için.",
+    "pricingTitle": "Fiyatlandırma"
   },
   "settings": {
     "title": "Ayarlar",

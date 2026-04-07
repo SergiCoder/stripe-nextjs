@@ -4,6 +4,8 @@ export interface PlanCardProps {
   name: string;
   price: string;
   interval: string;
+  /** Optional sub-label shown below the price (e.g. "$15.83/month billed yearly"). */
+  priceSubLabel?: string;
   description?: string;
   features?: string[];
   highlighted?: boolean;
@@ -16,6 +18,7 @@ export function PlanCard({
   name,
   price,
   interval,
+  priceSubLabel,
   description,
   features = [],
   highlighted = false,
@@ -41,6 +44,9 @@ export function PlanCard({
         <span className="text-4xl font-bold text-gray-900">{price}</span>
         <span className="text-sm text-gray-500">/{interval}</span>
       </p>
+      {priceSubLabel && (
+        <p className="mt-1 text-xs text-gray-500">{priceSubLabel}</p>
+      )}
       {description && (
         <p className="mt-4 text-sm text-gray-500">{description}</p>
       )}

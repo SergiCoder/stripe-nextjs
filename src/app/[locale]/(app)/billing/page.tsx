@@ -10,18 +10,25 @@ import {
 } from "@/infrastructure/registry";
 import { getCurrentUser } from "../_data/getCurrentUser";
 import { SubscriptionCard } from "@/presentation/components/organisms/SubscriptionCard";
-import { PricingTable } from "@/presentation/components/organisms/PricingTable";
+import { PricingSection } from "@/presentation/components/organisms/PricingSection";
 import { ProductsGrid } from "@/presentation/components/organisms/ProductsGrid";
 import { CheckoutButton } from "./_components/CheckoutButton";
 import { TeamCheckoutButton } from "./_components/TeamCheckoutButton";
 import { BillingPortalButton } from "./_components/BillingPortalButton";
-import { buildPlanCards } from "@/app/[locale]/_lib/buildPlanCards";
+import {
+  buildPlanCardGroups,
+  type PlanCardGroup,
+} from "@/app/[locale]/_lib/buildPlanCards";
 import type { Plan } from "@/domain/models/Plan";
 import type { Product } from "@/domain/models/Product";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("billing");
   return { title: t("title") };
+}
+
+function maxSavings(groups: PlanCardGroup[]): number {
+  return groups.reduce((max, g) => Math.max(max, g.yearlySavingsPct ?? 0), 0);
 }
 
 export default async function BillingPage() {
@@ -49,8 +56,13 @@ export default async function BillingPage() {
   const planName = subscription
     ? plans.find((p) => p.id === subscription.plan)?.name
     : undefined;
+  const currentPlan = subscription
+    ? plans.find((p) => p.id === subscription.plan)
+    : undefined;
+  const initialInterval: "month" | "year" =
+    currentPlan?.interval === "year" ? "year" : "month";
 
-  const planCards = buildPlanCards({
+  const groups = buildPlanCardGroups({
     plans,
     currentPlanId: subscription?.plan,
     labels: {
@@ -60,7 +72,7 @@ export default async function BillingPage() {
     },
     renderCta: ({ plan, isCurrent, isTeam, unitPrice, ctaLabel }) => {
       if (isCurrent || !plan.price) return null;
-      const highlighted = plan.name.toLowerCase().includes("pro");
+      const highlighted = plan.tier === "pro";
       if (isTeam) {
         return (
           <TeamCheckoutButton
@@ -84,8 +96,19 @@ export default async function BillingPage() {
     },
   });
 
+  const personalGroups = groups.filter((g) => g.context === "personal");
+  const teamGroups = groups.filter((g) => g.context === "team");
+
+  const personalSavingsPct = maxSavings(personalGroups);
+  const teamSavingsPct = maxSavings(teamGroups);
+
+  const sectionLabels = {
+    monthly: t("monthly"),
+    yearly: t("yearly"),
+  };
+
   return (
-    <div className="mx-auto max-w-3xl space-y-8">
+    <div className="mx-auto max-w-5xl space-y-12">
       <h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
 
       {subscription && (
@@ -107,10 +130,39 @@ export default async function BillingPage() {
         />
       )}
 
-      {planCards.length === 0 ? (
+      {groups.length === 0 ? (
         <p className="text-sm text-gray-500">{t("changePlan")}</p>
       ) : (
-        <PricingTable plans={planCards} />
+        <>
+          {personalGroups.length > 0 && (
+            <PricingSection
+              title={t("personalPlans")}
+              description={t("personalPlansDesc")}
+              groups={personalGroups}
+              labels={sectionLabels}
+              savingsBadge={
+                personalSavingsPct > 0
+                  ? t("savingsBadge", { pct: personalSavingsPct })
+                  : undefined
+              }
+              defaultInterval={initialInterval}
+            />
+          )}
+          {teamGroups.length > 0 && (
+            <PricingSection
+              title={t("teamPlans")}
+              description={t("teamPlansDesc")}
+              groups={teamGroups}
+              labels={sectionLabels}
+              savingsBadge={
+                teamSavingsPct > 0
+                  ? t("savingsBadge", { pct: teamSavingsPct })
+                  : undefined
+              }
+              defaultInterval={initialInterval}
+            />
+          )}
+        </>
       )}
 
       <ProductsGrid

@@ -171,7 +171,15 @@
     "perSeat": "per stoel",
     "downgrade": "Downgraden",
     "getStarted": "Aan de slag",
-    "select": "Selecteer"
+    "select": "Selecteer",
+    "monthly": "Maandelijks",
+    "yearly": "Jaarlijks",
+    "savingsBadge": "Bespaar tot {pct}%",
+    "personalPlans": "Persoonlijke abonnementen",
+    "teamPlans": "Teamabonnementen",
+    "personalPlansDesc": "Voor individuen.",
+    "teamPlansDesc": "Voor teams en organisaties.",
+    "pricingTitle": "Prijzen"
   },
   "settings": {
     "title": "Instellingen",

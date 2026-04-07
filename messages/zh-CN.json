@@ -171,7 +171,15 @@
     "perSeat": "每席",
     "downgrade": "降级",
     "getStarted": "开始使用",
-    "select": "选择"
+    "select": "选择",
+    "monthly": "按月",
+    "yearly": "按年",
+    "savingsBadge": "最多节省{pct}%",
+    "personalPlans": "个人套餐",
+    "teamPlans": "团队套餐",
+    "personalPlansDesc": "适合个人用户。",
+    "teamPlansDesc": "适合团队和组织。",
+    "pricingTitle": "定价"
   },
   "settings": {
     "title": "设置",

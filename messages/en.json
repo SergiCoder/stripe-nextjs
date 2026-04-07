@@ -171,7 +171,15 @@
     "perSeat": "per seat",
     "downgrade": "Downgrade",
     "getStarted": "Get started",
-    "select": "Select"
+    "select": "Select",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "savingsBadge": "Save up to {pct}%",
+    "personalPlans": "Personal plans",
+    "teamPlans": "Team plans",
+    "personalPlansDesc": "For individuals.",
+    "teamPlansDesc": "For teams and organizations.",
+    "pricingTitle": "Pricing"
   },
   "settings": {
     "title": "Settings",

@@ -171,7 +171,15 @@
     "perSeat": "1席あたり",
     "downgrade": "ダウングレード",
     "getStarted": "始める",
-    "select": "選択"
+    "select": "選択",
+    "monthly": "月額",
+    "yearly": "年額",
+    "savingsBadge": "最大{pct}%お得",
+    "personalPlans": "個人プラン",
+    "teamPlans": "チームプラン",
+    "personalPlansDesc": "個人向け。",
+    "teamPlansDesc": "チームと組織向け。",
+    "pricingTitle": "料金"
   },
   "settings": {
     "title": "設定",

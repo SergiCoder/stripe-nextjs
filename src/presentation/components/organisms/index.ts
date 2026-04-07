@@ -22,6 +22,11 @@ export {
 } from "./OrgMemberList";
 export { PricingTable, type PricingTableProps } from "./PricingTable";
 export {
+  PricingSection,
+  type PricingSectionProps,
+  type PricingSectionLabels,
+} from "./PricingSection";
+export {
   SubscriptionCard,
   type SubscriptionCardProps,
 } from "./SubscriptionCard";

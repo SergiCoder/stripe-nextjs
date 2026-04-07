@@ -8,19 +8,26 @@ import {
   productGateway,
   subscriptionGateway,
 } from "@/infrastructure/registry";
-import { PricingTable } from "@/presentation/components/organisms/PricingTable";
+import { PricingSection } from "@/presentation/components/organisms/PricingSection";
 import { ProductsGrid } from "@/presentation/components/organisms/ProductsGrid";
 import { GetStartedButton } from "./_components/GetStartedButton";
 import { CheckoutButton } from "@/app/[locale]/(app)/billing/_components/CheckoutButton";
 import { TeamCheckoutButton } from "@/app/[locale]/(app)/billing/_components/TeamCheckoutButton";
 import { getOptionalUser } from "../_data/getOptionalUser";
-import { buildPlanCards } from "@/app/[locale]/_lib/buildPlanCards";
+import {
+  buildPlanCardGroups,
+  type PlanCardGroup,
+} from "@/app/[locale]/_lib/buildPlanCards";
 import type { Plan } from "@/domain/models/Plan";
 import type { Product } from "@/domain/models/Product";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("billing");
-  return { title: t("title") };
+  return { title: t("pricingTitle") };
+}
+
+function maxSavings(groups: PlanCardGroup[]): number {
+  return groups.reduce((max, g) => Math.max(max, g.yearlySavingsPct ?? 0), 0);
 }
 
 export default async function PricingPage() {
@@ -52,7 +59,7 @@ export default async function PricingPage() {
     }
   }
 
-  const planCards = buildPlanCards({
+  const groups = buildPlanCardGroups({
     plans,
     currentPlanId,
     labels: {
@@ -62,7 +69,7 @@ export default async function PricingPage() {
     },
     renderCta: ({ plan, isCurrent, isTeam, unitPrice, ctaLabel }) => {
       if (!plan.price) return null;
-      const highlighted = plan.name.toLowerCase().includes("pro");
+      const highlighted = plan.tier === "pro";
       if (!user) {
         return (
           <GetStartedButton
@@ -97,19 +104,56 @@ export default async function PricingPage() {
     },
   });
 
-  if (planCards.length === 0) {
+  if (groups.length === 0) {
     return null;
   }
+
+  const personalGroups = groups.filter((g) => g.context === "personal");
+  const teamGroups = groups.filter((g) => g.context === "team");
+
+  const personalSavingsPct = maxSavings(personalGroups);
+  const teamSavingsPct = maxSavings(teamGroups);
+
+  const sectionLabels = {
+    monthly: t("monthly"),
+    yearly: t("yearly"),
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          {t("title")}
+          {t("pricingTitle")}
         </h1>
       </div>
-      <div className="mt-12">
-        <PricingTable plans={planCards} />
+
+      <div className="mt-12 space-y-16">
+        {personalGroups.length > 0 && (
+          <PricingSection
+            title={t("personalPlans")}
+            description={t("personalPlansDesc")}
+            groups={personalGroups}
+            labels={sectionLabels}
+            savingsBadge={
+              personalSavingsPct > 0
+                ? t("savingsBadge", { pct: personalSavingsPct })
+                : undefined
+            }
+          />
+        )}
+        {teamGroups.length > 0 && (
+          <PricingSection
+            title={t("teamPlans")}
+            description={t("teamPlansDesc")}
+            groups={teamGroups}
+            labels={sectionLabels}
+            savingsBadge={
+              teamSavingsPct > 0
+                ? t("savingsBadge", { pct: teamSavingsPct })
+                : undefined
+            }
+          />
+        )}
       </div>
 
       <ProductsGrid

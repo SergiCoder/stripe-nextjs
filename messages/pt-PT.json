@@ -171,7 +171,15 @@
     "perSeat": "por lugar",
     "downgrade": "Reduzir plano",
     "getStarted": "Começar",
-    "select": "Selecionar"
+    "select": "Selecionar",
+    "monthly": "Mensal",
+    "yearly": "Anual",
+    "savingsBadge": "Poupe até {pct}%",
+    "personalPlans": "Planos pessoais",
+    "teamPlans": "Planos de equipa",
+    "personalPlansDesc": "Para indivíduos.",
+    "teamPlansDesc": "Para equipas e organizações.",
+    "pricingTitle": "Preços"
   },
   "settings": {
     "title": "Definições",

@@ -171,7 +171,15 @@
     "perSeat": "por assento",
     "downgrade": "Reduzir plano",
     "getStarted": "Começar",
-    "select": "Selecionar"
+    "select": "Selecionar",
+    "monthly": "Mensal",
+    "yearly": "Anual",
+    "savingsBadge": "Economize até {pct}%",
+    "personalPlans": "Planos pessoais",
+    "teamPlans": "Planos de equipe",
+    "personalPlansDesc": "Para indivíduos.",
+    "teamPlansDesc": "Para equipes e organizações.",
+    "pricingTitle": "Preços"
   },
   "settings": {
     "title": "Configurações",

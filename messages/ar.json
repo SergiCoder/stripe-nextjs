@@ -171,7 +171,15 @@
     "perSeat": "لكل مقعد",
     "downgrade": "تخفيض",
     "getStarted": "ابدأ الآن",
-    "select": "اختر"
+    "select": "اختر",
+    "monthly": "شهري",
+    "yearly": "سنوي",
+    "savingsBadge": "وفّر حتى {pct}%",
+    "personalPlans": "الخطط الشخصية",
+    "teamPlans": "خطط الفريق",
+    "personalPlansDesc": "للأفراد.",
+    "teamPlansDesc": "للفِرق والمنظمات.",
+    "pricingTitle": "الأسعار"
   },
   "settings": {
     "title": "الإعدادات",

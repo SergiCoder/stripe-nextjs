@@ -171,7 +171,15 @@
     "perSeat": "за место",
     "downgrade": "Понизить",
     "getStarted": "Начать",
-    "select": "Выбрать"
+    "select": "Выбрать",
+    "monthly": "Ежемесячно",
+    "yearly": "Ежегодно",
+    "savingsBadge": "Экономия до {pct}%",
+    "personalPlans": "Личные тарифы",
+    "teamPlans": "Командные тарифы",
+    "personalPlansDesc": "Для частных лиц.",
+    "teamPlansDesc": "Для команд и организаций.",
+    "pricingTitle": "Цены"
   },
   "settings": {
     "title": "Настройки",
