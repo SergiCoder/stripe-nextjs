@@ -53,12 +53,12 @@ export function ErrorView({
               {retryLabel}
             </Button>
           )}
-          <Link
+          <a
             href={homeHref}
             className="focus-visible:ring-primary-500 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             {homeLabel}
-          </Link>
+          </a>
         </div>
         {errorId && errorIdLabel && (
           <p className="mt-8 font-mono text-xs text-gray-400">
