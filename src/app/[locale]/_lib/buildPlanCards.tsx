@@ -3,7 +3,8 @@ import type { Plan, PlanTier } from "@/domain/models/Plan";
 export interface PlanCardLabels {
   upgrade: string;
   downgrade: string;
-  perSeat: string;
+  /** Singular noun for one seat (e.g. "seat"). Used in team interval labels. */
+  seat: string;
 }
 
 export interface PlanVariantView {
@@ -106,7 +107,7 @@ export function buildPlanCardGroups({
     const ctaLabel = isUpgrade ? labels.upgrade : labels.downgrade;
 
     const intervalLabel = isTeam
-      ? `${labels.perSeat}/${plan.interval}`
+      ? `${labels.seat}/${plan.interval}`
       : plan.interval;
 
     let priceSubLabel: string | undefined;
@@ -114,7 +115,7 @@ export function buildPlanCardGroups({
       const monthlyEqDollars = unitPrice / 12 / 100;
       const formatted = `$${monthlyEqDollars.toFixed(monthlyEqDollars % 1 === 0 ? 0 : 2)}`;
       priceSubLabel = isTeam
-        ? `${formatted}/${labels.perSeat}/month billed yearly`
+        ? `${formatted}/${labels.seat}/month billed yearly`
         : `${formatted}/month billed yearly`;
     }
 

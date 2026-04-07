@@ -65,7 +65,7 @@ export default async function PricingPage() {
     labels: {
       upgrade: t("upgrade"),
       downgrade: t("downgrade"),
-      perSeat: t("perSeat"),
+      seat: t("seat"),
     },
     renderCta: ({ plan, isCurrent, isTeam, unitPrice, ctaLabel }) => {
       if (!plan.price) return null;

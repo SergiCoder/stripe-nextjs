@@ -68,7 +68,7 @@ export default async function BillingPage() {
     labels: {
       upgrade: t("upgrade"),
       downgrade: t("downgrade"),
-      perSeat: t("perSeat"),
+      seat: t("seat"),
     },
     renderCta: ({ plan, isCurrent, isTeam, unitPrice, ctaLabel }) => {
       if (isCurrent || !plan.price) return null;

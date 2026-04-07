@@ -5,7 +5,7 @@ import type { Plan } from "@/domain/models/Plan";
 const labels = {
   upgrade: "Upgrade",
   downgrade: "Downgrade",
-  perSeat: "per seat",
+  seat: "seat",
 };
 
 function makePlan(overrides: Partial<Plan> & { id: string }): Plan {
@@ -128,7 +128,7 @@ describe("buildPlanCardGroups", () => {
       labels,
       renderCta: () => null,
     });
-    expect(groups[0].monthly?.intervalLabel).toBe("per seat/month");
+    expect(groups[0].monthly?.intervalLabel).toBe("seat/month");
   });
 
   it("marks the pro tier as highlighted", () => {
