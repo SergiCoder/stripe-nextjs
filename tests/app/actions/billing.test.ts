@@ -65,6 +65,61 @@ describe("billing server actions", () => {
       expect(mockStartCheckoutExecute).not.toHaveBeenCalled();
       expect(mockRedirect).not.toHaveBeenCalled();
     });
+
+    it("forwards quantity when present and > 0", async () => {
+      mockStartCheckoutExecute.mockResolvedValue({
+        url: "https://checkout.stripe.com/sess_xyz",
+      });
+
+      const formData = new FormData();
+      formData.set("planPriceId", "price_team");
+      formData.set("quantity", "5");
+
+      await expect(startCheckout(formData)).rejects.toThrow("NEXT_REDIRECT");
+      expect(mockStartCheckoutExecute).toHaveBeenCalledWith(
+        expect.objectContaining({
+          planPriceId: "price_team",
+          quantity: 5,
+        }),
+      );
+    });
+
+    it("omits quantity when value is 0 or invalid", async () => {
+      mockStartCheckoutExecute.mockResolvedValue({
+        url: "https://checkout.stripe.com/sess_xyz",
+      });
+
+      const formData = new FormData();
+      formData.set("planPriceId", "price_team");
+      formData.set("quantity", "0");
+
+      await expect(startCheckout(formData)).rejects.toThrow("NEXT_REDIRECT");
+      const callArgs = mockStartCheckoutExecute.mock.calls[0][0];
+      expect(callArgs.quantity).toBeUndefined();
+    });
+
+    it("swallows non-redirect errors and returns without redirecting", async () => {
+      mockStartCheckoutExecute.mockRejectedValue(new Error("network down"));
+      const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      const formData = new FormData();
+      formData.set("planPriceId", "price_abc");
+
+      const result = await startCheckout(formData);
+      expect(result).toBeUndefined();
+      expect(mockRedirect).not.toHaveBeenCalled();
+      expect(errSpy).toHaveBeenCalled();
+      errSpy.mockRestore();
+    });
+
+    it("re-throws NEXT_REDIRECT errors from the use-case", async () => {
+      mockStartCheckoutExecute.mockRejectedValue(new Error("NEXT_REDIRECT"));
+
+      const formData = new FormData();
+      formData.set("planPriceId", "price_abc");
+
+      await expect(startCheckout(formData)).rejects.toThrow("NEXT_REDIRECT");
+    });
   });
 
   describe("openBillingPortal", () => {
@@ -80,6 +135,25 @@ describe("billing server actions", () => {
       expect(mockRedirect).toHaveBeenCalledWith(
         "https://billing.stripe.com/portal_123",
       );
+    });
+
+    it("swallows non-redirect errors and returns without redirecting", async () => {
+      mockOpenBillingPortalExecute.mockRejectedValue(new Error("portal down"));
+      const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      const result = await openBillingPortal();
+      expect(result).toBeUndefined();
+      expect(mockRedirect).not.toHaveBeenCalled();
+      expect(errSpy).toHaveBeenCalled();
+      errSpy.mockRestore();
+    });
+
+    it("re-throws NEXT_REDIRECT errors from the use-case", async () => {
+      mockOpenBillingPortalExecute.mockRejectedValue(
+        new Error("NEXT_REDIRECT"),
+      );
+
+      await expect(openBillingPortal()).rejects.toThrow("NEXT_REDIRECT");
     });
   });
 });

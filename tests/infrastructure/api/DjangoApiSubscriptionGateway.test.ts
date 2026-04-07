@@ -88,6 +88,25 @@ describe("DjangoApiSubscriptionGateway", () => {
       });
       expect(result).toEqual(response);
     });
+
+    it("includes quantity in snake_case body when provided", async () => {
+      mockApiFetch.mockResolvedValue({ url: "https://checkout.stripe.com/x" });
+
+      await gateway.createCheckoutSession({
+        planPriceId: "price_team",
+        quantity: 5,
+        successUrl: "http://localhost:3000/billing?status=success",
+        cancelUrl: "http://localhost:3000/billing",
+      });
+
+      expect(mockApiFetch).toHaveBeenCalledWith(
+        "/billing/checkout-sessions/",
+        expect.objectContaining({
+          method: "POST",
+          body: expect.stringContaining('"quantity":5'),
+        }),
+      );
+    });
   });
 
   describe("createBillingPortalSession", () => {
