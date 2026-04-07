@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "Dette er en pladsholderside for Feature 2."
+  },
+  "errorPage": {
+    "title": "Noget gik galt",
+    "description": "Vi stødte på en uventet fejl, da denne side skulle indlæses. Prøv igen om et øjeblik.",
+    "retry": "Prøv igen",
+    "home": "Tilbage til start",
+    "errorId": "Fejl-ID"
   }
 }

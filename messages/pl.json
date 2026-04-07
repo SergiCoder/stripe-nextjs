@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "To jest strona zastępcza dla Feature 2."
+  },
+  "errorPage": {
+    "title": "Coś poszło nie tak",
+    "description": "Podczas ładowania tej strony wystąpił nieoczekiwany błąd. Spróbuj ponownie za chwilę.",
+    "retry": "Spróbuj ponownie",
+    "home": "Wróć do strony głównej",
+    "errorId": "ID błędu"
   }
 }

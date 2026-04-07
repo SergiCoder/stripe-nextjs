@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "Esta é uma página provisória para Feature 2."
+  },
+  "errorPage": {
+    "title": "Algo deu errado",
+    "description": "Encontramos um erro inesperado ao carregar esta página. Tente novamente em um momento.",
+    "retry": "Tentar de novo",
+    "home": "Voltar ao início",
+    "errorId": "ID do erro"
   }
 }

@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "Bu, Feature 2 için bir yer tutucu sayfadır."
+  },
+  "errorPage": {
+    "title": "Bir şeyler ters gitti",
+    "description": "Bu sayfayı yüklerken beklenmedik bir hatayla karşılaştık. Lütfen birazdan tekrar deneyin.",
+    "retry": "Tekrar dene",
+    "home": "Ana sayfaya dön",
+    "errorId": "Hata kimliği"
   }
 }

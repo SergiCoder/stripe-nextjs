@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "Ini adalah halaman placeholder untuk Feature 2."
+  },
+  "errorPage": {
+    "title": "Terjadi kesalahan",
+    "description": "Kami mengalami kesalahan tak terduga saat memuat halaman ini. Silakan coba lagi sebentar.",
+    "retry": "Coba lagi",
+    "home": "Kembali ke beranda",
+    "errorId": "ID kesalahan"
   }
 }

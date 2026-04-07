@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "Dit is een tijdelijke pagina voor Feature 2."
+  },
+  "errorPage": {
+    "title": "Er is iets misgegaan",
+    "description": "Er is een onverwachte fout opgetreden bij het laden van deze pagina. Probeer het zo meteen opnieuw.",
+    "retry": "Opnieuw proberen",
+    "home": "Terug naar start",
+    "errorId": "Fout-ID"
   }
 }

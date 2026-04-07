@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "Questa è una pagina segnaposto per Feature 2."
+  },
+  "errorPage": {
+    "title": "Qualcosa è andato storto",
+    "description": "Si è verificato un errore imprevisto durante il caricamento di questa pagina. Riprova tra un momento.",
+    "retry": "Riprova",
+    "home": "Torna alla home",
+    "errorId": "ID errore"
   }
 }

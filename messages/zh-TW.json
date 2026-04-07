@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "這是Feature 2的佔位頁面。"
+  },
+  "errorPage": {
+    "title": "出現了一些問題",
+    "description": "載入此頁面時發生未預期的錯誤。請稍後再試。",
+    "retry": "重試",
+    "home": "返回首頁",
+    "errorId": "錯誤 ID"
   }
 }

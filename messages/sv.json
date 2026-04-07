@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "Detta är en platshållarsida för Feature 2."
+  },
+  "errorPage": {
+    "title": "Något gick fel",
+    "description": "Vi stötte på ett oväntat fel när sidan skulle laddas. Försök igen om en stund.",
+    "retry": "Försök igen",
+    "home": "Tillbaka till start",
+    "errorId": "Fel-ID"
   }
 }

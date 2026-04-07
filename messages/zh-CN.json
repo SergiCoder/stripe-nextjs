@@ -279,5 +279,12 @@
   "feature2": {
     "title": "Feature 2",
     "description": "这是Feature 2的占位页面。"
+  },
+  "errorPage": {
+    "title": "出现了一些问题",
+    "description": "加载此页面时发生意外错误。请稍后再试。",
+    "retry": "重试",
+    "home": "返回首页",
+    "errorId": "错误 ID"
   }
 }

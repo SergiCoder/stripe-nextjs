@@ -9,11 +9,11 @@ interface ErrorPageProps {
   reset: () => void;
 }
 
-export default function AuthError({ error, reset }: ErrorPageProps) {
+export default function MarketingError({ error, reset }: ErrorPageProps) {
   const t = useTranslations("errorPage");
 
   useEffect(() => {
-    console.error("[auth] route error:", error);
+    console.error("[marketing] route error:", error);
   }, [error]);
 
   return (
