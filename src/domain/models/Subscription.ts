@@ -1,3 +1,5 @@
+import type { Plan } from "./Plan";
+
 export type SubscriptionStatus =
   | "active"
   | "trialing"
@@ -9,7 +11,7 @@ export type SubscriptionStatus =
 export interface Subscription {
   id: string;
   status: SubscriptionStatus;
-  plan: string;
+  plan: Plan;
   quantity: number;
   discountPercent: number | null;
   discountEndAt: string | null;

@@ -53,25 +53,40 @@ export default async function BillingPage() {
     productsPromise,
   ]);
 
-  const planName = subscription
-    ? plans.find((p) => p.id === subscription.plan)?.name
-    : undefined;
-  const currentPlan = subscription
-    ? plans.find((p) => p.id === subscription.plan)
-    : undefined;
+  const currentPlan = subscription?.plan;
+  const planName = currentPlan?.name;
   const initialInterval: "month" | "year" =
     currentPlan?.interval === "year" ? "year" : "month";
+  const isTeamSubscription = currentPlan?.context === "team";
+
+  // Detect placeholder period-end dates returned by the backend for users
+  // without a real Stripe subscription (e.g. free tier). Anything more than
+  // a few decades out is treated as "no real renewal date".
+  const periodEndDate = subscription
+    ? new Date(subscription.currentPeriodEnd)
+    : null;
+  const hasRealPeriodEnd =
+    periodEndDate !== null &&
+    !Number.isNaN(periodEndDate.getTime()) &&
+    periodEndDate.getUTCFullYear() < 9000;
 
   const groups = buildPlanCardGroups({
     plans,
-    currentPlanId: subscription?.plan,
+    currentPlanId: currentPlan?.id,
     labels: {
       upgrade: t("upgrade"),
       downgrade: t("downgrade"),
       seat: t("seat"),
     },
     renderCta: ({ plan, isCurrent, isTeam, unitPrice, ctaLabel }) => {
-      if (isCurrent || !plan.price) return null;
+      if (isCurrent) {
+        return (
+          <p className="text-center text-sm font-medium text-gray-500">
+            {t("currentPlan")}
+          </p>
+        );
+      }
+      if (!plan.price) return null;
       const highlighted = plan.tier === "pro";
       if (isTeam) {
         return (
@@ -113,15 +128,20 @@ export default async function BillingPage() {
 
       {subscription && (
         <SubscriptionCard
+          eyebrowLabel={t("currentPlan")}
           planName={planName ?? t("currentPlan")}
           status={subscription.status}
           statusLabel={subscription.status}
-          interval=""
-          price={`${subscription.quantity} ${subscription.quantity === 1 ? t("seat") : t("seats")}`}
-          currentPeriodEnd={new Date(
-            subscription.currentPeriodEnd,
-          ).toLocaleDateString()}
-          periodEndLabel={t("periodEnd")}
+          interval={currentPlan?.interval}
+          price={
+            isTeamSubscription
+              ? `${subscription.quantity} ${subscription.quantity === 1 ? t("seat") : t("seats")}`
+              : undefined
+          }
+          currentPeriodEnd={
+            hasRealPeriodEnd ? periodEndDate!.toLocaleDateString() : undefined
+          }
+          periodEndLabel={hasRealPeriodEnd ? t("periodEnd") : undefined}
           cancelAtPeriodEnd={subscription.canceledAt !== null}
           cancelLabel={
             subscription.canceledAt !== null ? t("cancel") : undefined

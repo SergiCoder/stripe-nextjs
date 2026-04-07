@@ -21,7 +21,15 @@ describe("DjangoApiSubscriptionGateway", () => {
       mockApiFetch.mockResolvedValue({
         id: "s1",
         status: "active",
-        plan: "p1",
+        plan: {
+          id: "p1",
+          name: "Pro",
+          description: "Pro plan",
+          context: "personal",
+          tier: "pro",
+          interval: "month",
+          price: { id: "pp1", amount: 1900 },
+        },
         quantity: 1,
         discount_percent: null,
         discount_end_at: null,
@@ -38,7 +46,15 @@ describe("DjangoApiSubscriptionGateway", () => {
       expect(result).toEqual({
         id: "s1",
         status: "active",
-        plan: "p1",
+        plan: {
+          id: "p1",
+          name: "Pro",
+          description: "Pro plan",
+          context: "personal",
+          tier: "pro",
+          interval: "month",
+          price: { id: "pp1", amount: 1900 },
+        },
         quantity: 1,
         discountPercent: null,
         discountEndAt: null,

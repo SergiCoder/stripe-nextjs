@@ -6,7 +6,15 @@ import type { Subscription } from "@/domain/models/Subscription";
 const subscription: Subscription = {
   id: "s1",
   status: "active",
-  plan: "p1",
+  plan: {
+    id: "p1",
+    name: "Pro",
+    description: "Pro plan",
+    context: "personal",
+    tier: "pro",
+    interval: "month",
+    price: { id: "pp1", amount: 1900 },
+  },
   quantity: 1,
   discountPercent: null,
   discountEndAt: null,

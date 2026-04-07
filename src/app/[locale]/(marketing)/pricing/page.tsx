@@ -52,7 +52,7 @@ export default async function PricingPage() {
         new GetSubscription(subscriptionGateway).execute(),
         new ListProducts(productGateway).execute(),
       ]);
-      currentPlanId = subscription?.plan;
+      currentPlanId = subscription?.plan.id;
       products = fetchedProducts;
     } catch (err) {
       console.error("Failed to fetch subscription/products", err);
