@@ -85,6 +85,22 @@ describe("auth server actions", () => {
       expect(result).toEqual({ error: "Invalid credentials" });
       expect(mockRedirect).not.toHaveBeenCalled();
     });
+
+    it("redirects to billing checkout when plan is supplied", async () => {
+      mockSignInWithPassword.mockResolvedValue({ error: null });
+
+      const formData = new FormData();
+      formData.set("email", "user@example.com");
+      formData.set("password", "secret123");
+      formData.set("plan", "price_pro_monthly");
+
+      await expect(signIn(undefined, formData)).rejects.toThrow(
+        "NEXT_REDIRECT",
+      );
+      expect(mockRedirect).toHaveBeenCalledWith(
+        "/billing/checkout?plan=price_pro_monthly",
+      );
+    });
   });
 
   describe("signUp", () => {

@@ -28,7 +28,11 @@ const providers = [
   },
 ] as const;
 
-export function OAuthButtons() {
+interface OAuthButtonsProps {
+  plan?: string;
+}
+
+export function OAuthButtons({ plan }: OAuthButtonsProps = {}) {
   const t = useTranslations("auth.oauth");
   const locale = useLocale();
   const [loadingProvider, setLoadingProvider] = useState<Provider | null>(null);
@@ -36,10 +40,19 @@ export function OAuthButtons() {
   async function handleOAuth(provider: Provider) {
     setLoadingProvider(provider);
     const supabase = createClient();
+    const callbackUrl = new URL(
+      `${window.location.origin}/${locale}/auth/callback`,
+    );
+    if (plan) {
+      callbackUrl.searchParams.set(
+        "next",
+        `/billing/checkout?plan=${encodeURIComponent(plan)}`,
+      );
+    }
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/${locale}/auth/callback`,
+        redirectTo: callbackUrl.toString(),
       },
     });
     if (error) {

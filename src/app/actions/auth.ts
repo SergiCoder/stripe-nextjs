@@ -31,6 +31,11 @@ export async function signIn(_prevState: unknown, formData: FormData) {
     return { error: error.message };
   }
 
+  const plan = formData.get("plan");
+  if (typeof plan === "string" && plan) {
+    redirect(`/billing/checkout?plan=${encodeURIComponent(plan)}`);
+  }
+
   redirect("/dashboard");
 }
 

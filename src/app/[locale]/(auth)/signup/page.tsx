@@ -17,10 +17,11 @@ interface SignupPageProps {
 export default async function SignupPage({ searchParams }: SignupPageProps) {
   const t = await getTranslations("auth.register");
   const { plan } = await searchParams;
+  const loginHref = plan ? `/login?plan=${encodeURIComponent(plan)}` : "/login";
 
   return (
     <AuthLayout appName="SaaSmint" title={t("title")}>
-      <OAuthButtons />
+      <OAuthButtons plan={plan} />
       <AuthForm
         action={signUp}
         translationNamespace="auth.register"
@@ -28,7 +29,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
         showNameField
         hiddenFields={plan ? { plan } : undefined}
         footerLink={{
-          href: "/login",
+          href: loginHref,
           textKey: "hasAccount",
           linkKey: "login",
         }}
