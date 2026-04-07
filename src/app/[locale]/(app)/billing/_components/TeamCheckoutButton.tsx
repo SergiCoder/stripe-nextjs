@@ -52,7 +52,7 @@ export function TeamCheckoutButton({
           {quantity === 1 ? seatLabel : seatsLabel}
         </span>
       </div>
-      <p className="pb-4 text-base font-medium text-gray-900">
+      <p className="pb-3 text-base font-medium text-gray-900">
         {totalLabel}: ${total}/{interval}
       </p>
       <Button
