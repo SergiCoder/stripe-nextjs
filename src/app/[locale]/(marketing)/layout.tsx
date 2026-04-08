@@ -22,7 +22,7 @@ export default async function MarketingLayoutRoute({
   ]);
 
   const navLinks = [
-    { href: "/#features", label: t("features") },
+    { href: "/", label: t("home") },
     { href: "/pricing", label: t("pricing") },
     { href: "/blog", label: t("blog") },
     { href: "/contact", label: t("contactUs") },
