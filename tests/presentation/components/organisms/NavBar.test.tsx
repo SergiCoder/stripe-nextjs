@@ -117,7 +117,7 @@ describe("NavBar", () => {
       ...defaultProps,
       user: { fullName: "Jane Doe", avatarUrl: null },
       userMenuItems: [
-        { href: "/settings", label: "Profile" },
+        { href: "/profile", label: "Profile" },
         { href: "/subscription", label: "Subscription" },
       ],
       userMenuSignOut: <button>Sign Out</button>,

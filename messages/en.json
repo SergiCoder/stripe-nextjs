@@ -188,9 +188,8 @@
     "pricingTitle": "Pricing",
     "total": "Total"
   },
-  "settings": {
-    "title": "Settings",
-    "profile": "Profile",
+  "profile": {
+    "title": "Profile",
     "fullName": "Full name",
     "email": "Email",
     "preferredLocale": "Language",

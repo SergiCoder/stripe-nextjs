@@ -75,7 +75,7 @@ Server Actions live in `src/app/actions/` (one file per domain area: `auth.ts`, 
 
 - `(marketing)/` — public pages (landing, pricing, blog, about, contact, privacy, terms, cookies) using `MarketingLayout`
 - `(auth)/` — login/signup/forgot-password/reset-password pages using `AuthLayout`
-- `(app)/` — authenticated pages (dashboard, billing, settings, org) using `AppLayout`
+- `(app)/` — authenticated pages (dashboard, subscription, profile, org) using `AppLayout`
 
 Route-specific client components live in co-located `_components/` directories (e.g. `(app)/billing/_components/CheckoutButton.tsx`).
 

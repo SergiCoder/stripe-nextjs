@@ -102,10 +102,10 @@ describe("proxy", () => {
       expect(response.headers.get("location")).toContain("/en/login");
     });
 
-    it("redirects unauthenticated user to login on /settings", async () => {
+    it("redirects unauthenticated user to login on /profile", async () => {
       mockGetUser.mockResolvedValue({ data: { user: null } });
 
-      const request = createMockRequest("http://localhost:3000/en/settings");
+      const request = createMockRequest("http://localhost:3000/en/profile");
       const response = await proxy(request);
 
       expect(response.status).toBe(307);

@@ -132,7 +132,7 @@ describe("DashboardPage", () => {
     const links = screen
       .getAllByRole("link")
       .filter((a) =>
-        ["/subscription", "/settings", "/org", "#"].includes(
+        ["/subscription", "/profile", "/org", "#"].includes(
           a.getAttribute("href") ?? "",
         ),
       );
@@ -148,7 +148,7 @@ describe("DashboardPage", () => {
     );
     expect(screen.getByText("actionProfileTitle").closest("a")).toHaveAttribute(
       "href",
-      "/settings",
+      "/profile",
     );
     expect(screen.getByText("actionOrgTitle").closest("a")).toHaveAttribute(
       "href",

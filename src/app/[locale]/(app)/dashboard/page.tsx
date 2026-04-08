@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const ACTIONS = [
   { key: "actionBilling", href: "/subscription", icon: "💳" },
-  { key: "actionProfile", href: "/settings", icon: "👤" },
+  { key: "actionProfile", href: "/profile", icon: "👤" },
   { key: "actionOrg", href: "/org", icon: "👥" },
   { key: "actionCustomize", href: "#", icon: "🎨" },
 ] as const;

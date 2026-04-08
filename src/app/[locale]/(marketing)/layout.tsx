@@ -65,7 +65,7 @@ export default async function MarketingLayoutRoute({
   const userMenuItems = user
     ? [
         { href: "/dashboard", label: t("dashboard") },
-        { href: "/settings", label: t("profile") },
+        { href: "/profile", label: t("profile") },
         { href: "/subscription", label: t("subscription") },
       ]
     : undefined;
