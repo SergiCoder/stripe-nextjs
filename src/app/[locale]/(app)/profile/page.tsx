@@ -5,7 +5,7 @@ import { GetUserProfile } from "@/application/use-cases/user/GetUserProfile";
 import { referenceGateway, userGateway } from "@/infrastructure/registry";
 import { getCurrentUser } from "../_data/getCurrentUser";
 import { ChangePasswordForm } from "./_components/ChangePasswordForm";
-import { DeleteAccountDialog } from "./_components/DeleteAccountDialog";
+import { DangerZone } from "./_components/DangerZone";
 import { ProfileForm } from "./_components/ProfileForm";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,15 +35,7 @@ export default async function ProfilePage() {
         </h2>
         <ChangePasswordForm />
       </section>
-      <section className="rounded-lg border border-red-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-2 text-lg font-semibold text-red-600">
-          {t("danger")}
-        </h2>
-        <p className="text-sm text-gray-600">{t("deleteConfirm")}</p>
-        <div className="mt-4">
-          <DeleteAccountDialog userEmail={user.email} />
-        </div>
-      </section>
+      <DangerZone userEmail={user.email} />
     </div>
   );
 }
