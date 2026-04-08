@@ -81,6 +81,7 @@ export function buildPlanCardGroups({
 }: BuildPlanCardGroupsOptions): PlanCardGroup[] {
   const currentPlan = plans.find((p) => p.id === currentPlanId);
   const currentMonthlyEq = currentPlan ? monthlyEquivalent(currentPlan) : 0;
+  const currentContext = currentPlan?.context;
 
   // Group by (context, tier).
   const groups = new Map<
@@ -102,7 +103,17 @@ export function buildPlanCardGroups({
     const isTeam = plan.context === "team";
     const isCurrent = Boolean(currentPlanId) && plan.id === currentPlanId;
     const monthlyEq = monthlyEquivalent(plan);
-    const isUpgrade = monthlyEq > currentMonthlyEq;
+    // Personal → team is always an upgrade regardless of price (it unlocks
+    // collaboration features). Team → personal is always a downgrade. Within
+    // the same context, fall back to price comparison.
+    let isUpgrade: boolean;
+    if (currentContext === "personal" && isTeam) {
+      isUpgrade = true;
+    } else if (currentContext === "team" && !isTeam) {
+      isUpgrade = false;
+    } else {
+      isUpgrade = monthlyEq > currentMonthlyEq;
+    }
     const ctaLabel = labels.upgrade;
 
     const intervalLabel = isTeam

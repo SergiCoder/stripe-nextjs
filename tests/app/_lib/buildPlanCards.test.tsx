@@ -188,4 +188,66 @@ describe("buildPlanCardGroups", () => {
     expect(pro?.isUpgrade).toBe(true);
     expect(pro?.label).toBe("Upgrade");
   });
+
+  it("treats personal → team as an upgrade even when the team plan is cheaper", () => {
+    const plans: Plan[] = [
+      makePlan({
+        id: "personal-pro",
+        context: "personal",
+        tier: "pro",
+        interval: "month",
+        price: { id: "pp", amount: 5000 },
+      }),
+      makePlan({
+        id: "team-basic",
+        context: "team",
+        tier: "basic",
+        interval: "month",
+        price: { id: "tb", amount: 1000 },
+      }),
+    ];
+    const ctaCalls: Array<{ id: string; isUpgrade: boolean }> = [];
+    buildPlanCardGroups({
+      plans,
+      currentPlanId: "personal-pro",
+      labels,
+      renderCta: ({ plan, isUpgrade }) => {
+        ctaCalls.push({ id: plan.id, isUpgrade });
+        return null;
+      },
+    });
+    const team = ctaCalls.find((c) => c.id === "team-basic");
+    expect(team?.isUpgrade).toBe(true);
+  });
+
+  it("treats team → personal as a downgrade even when the personal plan is more expensive", () => {
+    const plans: Plan[] = [
+      makePlan({
+        id: "team-basic",
+        context: "team",
+        tier: "basic",
+        interval: "month",
+        price: { id: "tb", amount: 1000 },
+      }),
+      makePlan({
+        id: "personal-pro",
+        context: "personal",
+        tier: "pro",
+        interval: "month",
+        price: { id: "pp", amount: 5000 },
+      }),
+    ];
+    const ctaCalls: Array<{ id: string; isUpgrade: boolean }> = [];
+    buildPlanCardGroups({
+      plans,
+      currentPlanId: "team-basic",
+      labels,
+      renderCta: ({ plan, isUpgrade }) => {
+        ctaCalls.push({ id: plan.id, isUpgrade });
+        return null;
+      },
+    });
+    const personal = ctaCalls.find((c) => c.id === "personal-pro");
+    expect(personal?.isUpgrade).toBe(false);
+  });
 });
