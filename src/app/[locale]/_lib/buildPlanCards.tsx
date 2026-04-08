@@ -59,6 +59,15 @@ export interface BuildPlanCardGroupsOptions {
 
 const TIER_ORDER: PlanTier[] = ["free", "basic", "pro"];
 
+/**
+ * Returns the maximum yearly savings percentage across the given groups, or
+ * 0 when no group has a positive savings value. Used by callers to render a
+ * single "Save up to X%" badge above a section of plan cards.
+ */
+export function maxYearlySavingsPct(groups: PlanCardGroup[]): number {
+  return groups.reduce((max, g) => Math.max(max, g.yearlySavingsPct ?? 0), 0);
+}
+
 function tierDisplayName(tier: PlanTier): string {
   return tier.charAt(0).toUpperCase() + tier.slice(1);
 }
