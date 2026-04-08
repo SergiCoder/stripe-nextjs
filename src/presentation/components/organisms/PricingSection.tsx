@@ -76,7 +76,7 @@ export function PricingSection({
               role="tab"
               aria-selected={interval === "month"}
               onClick={() => setInterval("month")}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+              className={`cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                 interval === "month"
                   ? "bg-primary-600 text-white"
                   : "text-gray-600 hover:text-gray-900"
@@ -89,7 +89,7 @@ export function PricingSection({
               role="tab"
               aria-selected={interval === "year"}
               onClick={() => setInterval("year")}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+              className={`cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                 interval === "year"
                   ? "bg-primary-600 text-white"
                   : "text-gray-600 hover:text-gray-900"
