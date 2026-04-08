@@ -55,7 +55,10 @@ export async function signUp(_prevState: unknown, formData: FormData) {
   const plan = formData.get("plan");
   const callbackUrl = new URL(`${APP_ORIGIN}/auth/callback`);
   if (typeof plan === "string" && plan) {
-    callbackUrl.searchParams.set("next", `/subscription/checkout?plan=${plan}`);
+    callbackUrl.searchParams.set(
+      "next",
+      `/subscription/checkout?plan=${encodeURIComponent(plan)}`,
+    );
   }
 
   const supabase = await createClient();

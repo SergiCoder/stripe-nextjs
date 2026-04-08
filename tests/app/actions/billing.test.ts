@@ -166,6 +166,18 @@ describe("billing server actions", () => {
   });
 
   describe("openBillingPortal", () => {
+    const portalUser = { id: "u1" };
+    const portalSubscription = {
+      id: "s1",
+      plan: { context: "personal" },
+    };
+
+    beforeEach(() => {
+      mockGetCurrentUserExecute.mockResolvedValue(portalUser);
+      mockGetSubscriptionExecute.mockResolvedValue(portalSubscription);
+      mockCanManageBilling.mockResolvedValue(true);
+    });
+
     it("redirects to billing portal URL with returnUrl", async () => {
       mockOpenBillingPortalExecute.mockResolvedValue({
         url: "https://billing.stripe.com/portal_123",
@@ -178,6 +190,17 @@ describe("billing server actions", () => {
       expect(mockRedirect).toHaveBeenCalledWith(
         "https://billing.stripe.com/portal_123",
       );
+    });
+
+    it("does not open the portal when the caller cannot manage billing", async () => {
+      mockCanManageBilling.mockResolvedValue(false);
+      const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      const result = await openBillingPortal();
+      expect(result).toBeUndefined();
+      expect(mockOpenBillingPortalExecute).not.toHaveBeenCalled();
+      expect(mockRedirect).not.toHaveBeenCalled();
+      errSpy.mockRestore();
     });
 
     it("swallows non-redirect errors and returns without redirecting", async () => {

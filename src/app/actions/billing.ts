@@ -11,27 +11,12 @@ import { StartCheckout } from "@/application/use-cases/billing/StartCheckout";
 import { BillingError } from "@/domain/errors/BillingError";
 import { authGateway, subscriptionGateway } from "@/infrastructure/registry";
 import { canManageBilling } from "@/app/[locale]/(app)/subscription/_data/canManageBilling";
-
-const APP_ORIGIN = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
-
-const TRUSTED_REDIRECT_HOSTS = ["checkout.stripe.com", "billing.stripe.com"];
+import {
+  APP_ORIGIN,
+  assertTrustedRedirect,
+} from "@/app/[locale]/(app)/subscription/_data/trustedRedirect";
 
 const MAX_CHECKOUT_QUANTITY = 100;
-
-function assertTrustedRedirect(url: string): void {
-  let parsed: URL;
-  try {
-    parsed = new URL(url);
-  } catch {
-    throw new Error("Invalid redirect URL");
-  }
-  if (parsed.protocol !== "https:") {
-    throw new Error("Untrusted redirect URL");
-  }
-  if (!TRUSTED_REDIRECT_HOSTS.includes(parsed.hostname)) {
-    throw new Error("Untrusted redirect URL");
-  }
-}
 
 export async function startCheckout(formData: FormData) {
   const planPriceId = formData.get("planPriceId");
@@ -69,6 +54,7 @@ export async function startCheckout(formData: FormData) {
 export async function openBillingPortal() {
   let url: string;
   try {
+    await assertCanManageBilling();
     ({ url } = await new OpenBillingPortal(subscriptionGateway).execute({
       returnUrl: `${APP_ORIGIN}/subscription`,
     }));
@@ -104,24 +90,36 @@ async function assertCanManageBilling(): Promise<void> {
   }
 }
 
-export async function cancelSubscription() {
+export type BillingActionResult =
+  | { ok: true }
+  | { ok: false; error: string };
+
+function toErrorMessage(err: unknown): string {
+  if (err instanceof BillingError) return err.message;
+  if (err instanceof Error) return err.message;
+  return "Unknown error";
+}
+
+export async function cancelSubscription(): Promise<BillingActionResult> {
   try {
     await assertCanManageBilling();
     await new CancelSubscription(subscriptionGateway).execute();
   } catch (err) {
     console.error("Failed to cancel subscription", err);
-    return;
+    return { ok: false, error: toErrorMessage(err) };
   }
   revalidatePath("/[locale]/subscription", "page");
+  return { ok: true };
 }
 
-export async function resumeSubscription() {
+export async function resumeSubscription(): Promise<BillingActionResult> {
   try {
     await assertCanManageBilling();
     await new ResumeSubscription(subscriptionGateway).execute();
   } catch (err) {
     console.error("Failed to resume subscription", err);
-    return;
+    return { ok: false, error: toErrorMessage(err) };
   }
   revalidatePath("/[locale]/subscription", "page");
+  return { ok: true };
 }
