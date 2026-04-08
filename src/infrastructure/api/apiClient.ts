@@ -1,19 +1,29 @@
+import { cache } from "react";
 import { AuthError } from "@/domain/errors/AuthError";
 import { createClient } from "@/infrastructure/supabase/server";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8001";
 
-export async function getAuthToken(): Promise<string> {
+// Wrapped with React.cache so that multiple apiFetch() calls within a single
+// server render share one Supabase auth round-trip instead of validating the
+// JWT once per request.
+export const getAuthToken = cache(_getAuthToken);
+
+async function _getAuthToken(): Promise<string> {
   const supabase = await createClient();
   // Validate and refresh the JWT before reading the access token.
   // getSession() alone reads stale cookies without server-side validation.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // Run getUser() and getSession() in parallel since both hit the Supabase
+  // auth endpoint and neither depends on the other's result.
+  const [
+    {
+      data: { user },
+    },
+    {
+      data: { session },
+    },
+  ] = await Promise.all([supabase.auth.getUser(), supabase.auth.getSession()]);
   if (!user) throw new AuthError("No active session", "NO_SESSION");
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
   if (!session) throw new AuthError("No active session", "NO_SESSION");
   return session.access_token;
 }
