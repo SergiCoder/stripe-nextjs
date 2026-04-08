@@ -155,14 +155,6 @@ describe("billing server actions", () => {
       errSpy.mockRestore();
     });
 
-    it("re-throws NEXT_REDIRECT errors from the use-case", async () => {
-      mockStartCheckoutExecute.mockRejectedValue(new Error("NEXT_REDIRECT"));
-
-      const formData = new FormData();
-      formData.set("planPriceId", "price_abc");
-
-      await expect(startCheckout(formData)).rejects.toThrow("NEXT_REDIRECT");
-    });
   });
 
   describe("openBillingPortal", () => {
@@ -214,13 +206,6 @@ describe("billing server actions", () => {
       errSpy.mockRestore();
     });
 
-    it("re-throws NEXT_REDIRECT errors from the use-case", async () => {
-      mockOpenBillingPortalExecute.mockRejectedValue(
-        new Error("NEXT_REDIRECT"),
-      );
-
-      await expect(openBillingPortal()).rejects.toThrow("NEXT_REDIRECT");
-    });
   });
 
   describe("cancelSubscription", () => {

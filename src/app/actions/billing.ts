@@ -34,36 +34,38 @@ export async function startCheckout(formData: FormData) {
     }
   }
 
-  let url: string;
+  let url: string | null = null;
   try {
-    ({ url } = await new StartCheckout(subscriptionGateway).execute({
+    const session = await new StartCheckout(subscriptionGateway).execute({
       planPriceId,
       ...(quantity ? { quantity } : {}),
       successUrl: `${APP_ORIGIN}/subscription?status=success`,
       cancelUrl: `${APP_ORIGIN}/subscription`,
-    }));
-    assertTrustedRedirect(url);
+    });
+    assertTrustedRedirect(session.url);
+    url = session.url;
   } catch (err) {
-    if (err instanceof Error && err.message === "NEXT_REDIRECT") throw err;
     console.error("Failed to start checkout", err);
-    return;
   }
+
+  if (!url) return;
   redirect(url);
 }
 
 export async function openBillingPortal() {
-  let url: string;
+  let url: string | null = null;
   try {
     await assertCanManageBilling();
-    ({ url } = await new OpenBillingPortal(subscriptionGateway).execute({
+    const session = await new OpenBillingPortal(subscriptionGateway).execute({
       returnUrl: `${APP_ORIGIN}/subscription`,
-    }));
-    assertTrustedRedirect(url);
+    });
+    assertTrustedRedirect(session.url);
+    url = session.url;
   } catch (err) {
-    if (err instanceof Error && err.message === "NEXT_REDIRECT") throw err;
     console.error("Failed to open billing portal", err);
-    return;
   }
+
+  if (!url) return;
   redirect(url);
 }
 
