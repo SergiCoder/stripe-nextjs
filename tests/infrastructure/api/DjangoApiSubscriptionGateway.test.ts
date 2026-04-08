@@ -142,4 +142,29 @@ describe("DjangoApiSubscriptionGateway", () => {
       expect(result).toEqual(response);
     });
   });
+
+  describe("cancelSubscription", () => {
+    it("sends DELETE /billing/subscription/", async () => {
+      mockApiFetch.mockResolvedValue(undefined);
+
+      await gateway.cancelSubscription();
+
+      expect(mockApiFetch).toHaveBeenCalledWith("/billing/subscription/", {
+        method: "DELETE",
+      });
+    });
+  });
+
+  describe("resumeSubscription", () => {
+    it("sends PATCH /billing/subscription/ with cancel_at_period_end=false", async () => {
+      mockApiFetch.mockResolvedValue(undefined);
+
+      await gateway.resumeSubscription();
+
+      expect(mockApiFetch).toHaveBeenCalledWith("/billing/subscription/", {
+        method: "PATCH",
+        body: JSON.stringify({ cancel_at_period_end: false }),
+      });
+    });
+  });
 });

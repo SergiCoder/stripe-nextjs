@@ -4,7 +4,6 @@ import type { Plan } from "@/domain/models/Plan";
 
 const labels = {
   upgrade: "Upgrade",
-  downgrade: "Downgrade",
   seat: "seat",
 };
 
@@ -147,7 +146,7 @@ describe("buildPlanCardGroups", () => {
     expect(basic?.highlighted).toBe(false);
   });
 
-  it("returns no CTA for the current plan and labels switch as upgrade vs downgrade by monthly equivalent", () => {
+  it("flags the current plan and marks higher-priced plans as upgrades", () => {
     const plans: Plan[] = [
       makePlan({
         id: "basic-m",
@@ -162,20 +161,31 @@ describe("buildPlanCardGroups", () => {
         price: { id: "pm", amount: 5000 },
       }),
     ];
-    const ctaCalls: Array<{ id: string; isCurrent: boolean; label: string }> =
-      [];
+    const ctaCalls: Array<{
+      id: string;
+      isCurrent: boolean;
+      isUpgrade: boolean;
+      label: string;
+    }> = [];
     buildPlanCardGroups({
       plans,
       currentPlanId: "basic-m",
       labels,
-      renderCta: ({ plan, isCurrent, ctaLabel }) => {
-        ctaCalls.push({ id: plan.id, isCurrent, label: ctaLabel });
+      renderCta: ({ plan, isCurrent, isUpgrade, ctaLabel }) => {
+        ctaCalls.push({
+          id: plan.id,
+          isCurrent,
+          isUpgrade,
+          label: ctaLabel,
+        });
         return null;
       },
     });
     const basic = ctaCalls.find((c) => c.id === "basic-m");
     const pro = ctaCalls.find((c) => c.id === "pro-m");
     expect(basic?.isCurrent).toBe(true);
+    expect(basic?.isUpgrade).toBe(false);
+    expect(pro?.isUpgrade).toBe(true);
     expect(pro?.label).toBe("Upgrade");
   });
 });

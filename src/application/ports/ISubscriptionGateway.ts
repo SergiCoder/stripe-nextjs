@@ -17,4 +17,8 @@ export interface ISubscriptionGateway {
   createBillingPortalSession(
     input: BillingPortalInput,
   ): Promise<{ url: string }>;
+  /** Schedule the subscription to cancel at the end of the current period. */
+  cancelSubscription(): Promise<void>;
+  /** Undo a pending cancellation so the subscription renews normally. */
+  resumeSubscription(): Promise<void>;
 }

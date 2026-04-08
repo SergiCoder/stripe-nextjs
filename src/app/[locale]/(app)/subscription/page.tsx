@@ -15,6 +15,9 @@ import { ProductsGrid } from "@/presentation/components/organisms/ProductsGrid";
 import { CheckoutButton } from "./_components/CheckoutButton";
 import { TeamCheckoutButton } from "./_components/TeamCheckoutButton";
 import { BillingPortalButton } from "./_components/BillingPortalButton";
+import { CancelRenewalButton } from "./_components/CancelRenewalButton";
+import { ResumeSubscriptionButton } from "./_components/ResumeSubscriptionButton";
+import { canManageBilling } from "./_data/canManageBilling";
 import {
   buildPlanCardGroups,
   type PlanCardGroup,
@@ -45,7 +48,7 @@ export default async function BillingPage() {
       return [];
     });
 
-  const [t, locale, , subscription, plans, products] = await Promise.all([
+  const [t, locale, user, subscription, plans, products] = await Promise.all([
     getTranslations("billing"),
     getLocale(),
     getCurrentUser(),
@@ -53,6 +56,10 @@ export default async function BillingPage() {
     plansPromise,
     productsPromise,
   ]);
+
+  const canManage = subscription
+    ? await canManageBilling(user, subscription)
+    : false;
 
   const currentPlan = subscription?.plan;
   const planName = currentPlan?.name;
@@ -76,10 +83,16 @@ export default async function BillingPage() {
     currentPlanId: currentPlan?.id,
     labels: {
       upgrade: t("upgrade"),
-      downgrade: t("downgrade"),
       seat: t("seat"),
     },
-    renderCta: ({ plan, isCurrent, isTeam, unitPrice, ctaLabel }) => {
+    renderCta: ({
+      plan,
+      isCurrent,
+      isUpgrade,
+      isTeam,
+      unitPrice,
+      ctaLabel,
+    }) => {
       if (isCurrent) {
         return (
           <p className="text-center text-sm font-medium text-gray-500">
@@ -88,6 +101,7 @@ export default async function BillingPage() {
         );
       }
       if (!plan.price) return null;
+      if (!isUpgrade) return null;
       const highlighted = plan.tier === "pro";
       if (isTeam) {
         return (
@@ -142,6 +156,32 @@ export default async function BillingPage() {
             .filter(Boolean)
             .join(" · ");
           const isCanceling = subscription.canceledAt !== null;
+
+          const periodEndDisplay =
+            hasRealPeriodEnd && periodEndDate
+              ? new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(
+                  periodEndDate,
+                )
+              : "";
+
+          const manageAction = canManage ? (
+            isCanceling ? (
+              <ResumeSubscriptionButton>
+                {t("resumeSubscription")}
+              </ResumeSubscriptionButton>
+            ) : (
+              <CancelRenewalButton
+                label={t("cancelRenewal")}
+                confirmTitle={t("cancelRenewalTitle")}
+                confirmBody={t("cancelRenewalBody", {
+                  date: periodEndDisplay,
+                })}
+                confirmAction={t("cancelRenewal")}
+                confirmDismiss={t("cancelRenewalKeep")}
+              />
+            )
+          ) : null;
+
           return (
             <SubscriptionCard
               eyebrowLabel={t("currentPlan")}
@@ -162,7 +202,12 @@ export default async function BillingPage() {
               }
               cancelAtPeriodEnd={isCanceling}
               cancelLabel={isCanceling ? t("cancel") : undefined}
-              actions={<BillingPortalButton>{t("portal")}</BillingPortalButton>}
+              actions={
+                <div className="flex flex-wrap gap-2">
+                  {manageAction}
+                  <BillingPortalButton>{t("portal")}</BillingPortalButton>
+                </div>
+              }
             />
           );
         })()}

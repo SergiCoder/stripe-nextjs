@@ -38,4 +38,15 @@ export class DjangoApiSubscriptionGateway implements ISubscriptionGateway {
       body: JSON.stringify(keysToSnake(input)),
     });
   }
+
+  async cancelSubscription(): Promise<void> {
+    await apiFetch<void>("/billing/subscription/", { method: "DELETE" });
+  }
+
+  async resumeSubscription(): Promise<void> {
+    await apiFetch<void>("/billing/subscription/", {
+      method: "PATCH",
+      body: JSON.stringify({ cancel_at_period_end: false }),
+    });
+  }
 }

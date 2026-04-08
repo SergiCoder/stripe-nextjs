@@ -1,9 +1,16 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { StartCheckout } from "@/application/use-cases/billing/StartCheckout";
+import { CancelSubscription } from "@/application/use-cases/billing/CancelSubscription";
+import { GetCurrentUser } from "@/application/use-cases/auth/GetCurrentUser";
+import { GetSubscription } from "@/application/use-cases/billing/GetSubscription";
 import { OpenBillingPortal } from "@/application/use-cases/billing/OpenBillingPortal";
-import { subscriptionGateway } from "@/infrastructure/registry";
+import { ResumeSubscription } from "@/application/use-cases/billing/ResumeSubscription";
+import { StartCheckout } from "@/application/use-cases/billing/StartCheckout";
+import { BillingError } from "@/domain/errors/BillingError";
+import { authGateway, subscriptionGateway } from "@/infrastructure/registry";
+import { canManageBilling } from "@/app/[locale]/(app)/subscription/_data/canManageBilling";
 
 const APP_ORIGIN = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
@@ -72,4 +79,49 @@ export async function openBillingPortal() {
     return;
   }
   redirect(url);
+}
+
+/**
+ * Ensures the current user is allowed to manage billing on the active
+ * subscription. Throws a BillingError otherwise. Used as defense-in-depth
+ * for the cancel/resume server actions — the UI already hides the buttons
+ * for non-billing members, and the Django API also enforces the rule.
+ */
+async function assertCanManageBilling(): Promise<void> {
+  const [user, subscription] = await Promise.all([
+    new GetCurrentUser(authGateway).execute(),
+    new GetSubscription(subscriptionGateway).execute(),
+  ]);
+  if (!subscription) {
+    throw new BillingError("No active subscription", "no_subscription");
+  }
+  const allowed = await canManageBilling(user, subscription);
+  if (!allowed) {
+    throw new BillingError(
+      "You do not have permission to manage billing",
+      "not_billing_member",
+    );
+  }
+}
+
+export async function cancelSubscription() {
+  try {
+    await assertCanManageBilling();
+    await new CancelSubscription(subscriptionGateway).execute();
+  } catch (err) {
+    console.error("Failed to cancel subscription", err);
+    return;
+  }
+  revalidatePath("/[locale]/subscription", "page");
+}
+
+export async function resumeSubscription() {
+  try {
+    await assertCanManageBilling();
+    await new ResumeSubscription(subscriptionGateway).execute();
+  } catch (err) {
+    console.error("Failed to resume subscription", err);
+    return;
+  }
+  revalidatePath("/[locale]/subscription", "page");
 }

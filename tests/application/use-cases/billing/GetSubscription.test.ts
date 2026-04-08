@@ -32,6 +32,8 @@ function makeGateway(
     getSubscription: vi.fn().mockResolvedValue(subscription),
     createCheckoutSession: vi.fn(),
     createBillingPortalSession: vi.fn(),
+    cancelSubscription: vi.fn(),
+    resumeSubscription: vi.fn(),
     ...overrides,
   };
 }

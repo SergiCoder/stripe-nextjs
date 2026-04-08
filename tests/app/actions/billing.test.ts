@@ -8,6 +8,11 @@ vi.mock("next/navigation", () => ({
   },
 }));
 
+const mockRevalidatePath = vi.fn();
+vi.mock("next/cache", () => ({
+  revalidatePath: (...args: unknown[]) => mockRevalidatePath(...args),
+}));
+
 const mockStartCheckoutExecute = vi.fn();
 vi.mock("@/application/use-cases/billing/StartCheckout", () => ({
   StartCheckout: function StartCheckout() {
@@ -22,18 +27,56 @@ vi.mock("@/application/use-cases/billing/OpenBillingPortal", () => ({
   },
 }));
 
+const mockCancelSubscriptionExecute = vi.fn();
+vi.mock("@/application/use-cases/billing/CancelSubscription", () => ({
+  CancelSubscription: function CancelSubscription() {
+    return { execute: mockCancelSubscriptionExecute };
+  },
+}));
+
+const mockResumeSubscriptionExecute = vi.fn();
+vi.mock("@/application/use-cases/billing/ResumeSubscription", () => ({
+  ResumeSubscription: function ResumeSubscription() {
+    return { execute: mockResumeSubscriptionExecute };
+  },
+}));
+
+const mockGetCurrentUserExecute = vi.fn();
+vi.mock("@/application/use-cases/auth/GetCurrentUser", () => ({
+  GetCurrentUser: function GetCurrentUser() {
+    return { execute: mockGetCurrentUserExecute };
+  },
+}));
+
+const mockGetSubscriptionExecute = vi.fn();
+vi.mock("@/application/use-cases/billing/GetSubscription", () => ({
+  GetSubscription: function GetSubscription() {
+    return { execute: mockGetSubscriptionExecute };
+  },
+}));
+
+const mockCanManageBilling = vi.fn();
+vi.mock("@/app/[locale]/(app)/subscription/_data/canManageBilling", () => ({
+  canManageBilling: (...args: unknown[]) => mockCanManageBilling(...args),
+}));
+
 vi.mock("@/infrastructure/registry", () => ({
   subscriptionGateway: {},
+  authGateway: {},
 }));
 
 let startCheckout: typeof import("@/app/actions/billing").startCheckout;
 let openBillingPortal: typeof import("@/app/actions/billing").openBillingPortal;
+let cancelSubscription: typeof import("@/app/actions/billing").cancelSubscription;
+let resumeSubscription: typeof import("@/app/actions/billing").resumeSubscription;
 
 beforeEach(async () => {
   vi.clearAllMocks();
   const mod = await import("@/app/actions/billing");
   startCheckout = mod.startCheckout;
   openBillingPortal = mod.openBillingPortal;
+  cancelSubscription = mod.cancelSubscription;
+  resumeSubscription = mod.resumeSubscription;
 });
 
 describe("billing server actions", () => {
@@ -154,6 +197,107 @@ describe("billing server actions", () => {
       );
 
       await expect(openBillingPortal()).rejects.toThrow("NEXT_REDIRECT");
+    });
+  });
+
+  describe("cancelSubscription", () => {
+    const user = { id: "u1" };
+    const subscription = {
+      id: "s1",
+      plan: { context: "personal" },
+    };
+
+    it("calls the use-case and revalidates the subscription page when allowed", async () => {
+      mockGetCurrentUserExecute.mockResolvedValue(user);
+      mockGetSubscriptionExecute.mockResolvedValue(subscription);
+      mockCanManageBilling.mockResolvedValue(true);
+      mockCancelSubscriptionExecute.mockResolvedValue(undefined);
+
+      await cancelSubscription();
+
+      expect(mockCanManageBilling).toHaveBeenCalledWith(user, subscription);
+      expect(mockCancelSubscriptionExecute).toHaveBeenCalledOnce();
+      expect(mockRevalidatePath).toHaveBeenCalledWith(
+        "/[locale]/subscription",
+        "page",
+      );
+    });
+
+    it("does not call the use-case or revalidate when the user cannot manage billing", async () => {
+      mockGetCurrentUserExecute.mockResolvedValue(user);
+      mockGetSubscriptionExecute.mockResolvedValue(subscription);
+      mockCanManageBilling.mockResolvedValue(false);
+      const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      await cancelSubscription();
+
+      expect(mockCancelSubscriptionExecute).not.toHaveBeenCalled();
+      expect(mockRevalidatePath).not.toHaveBeenCalled();
+      expect(errSpy).toHaveBeenCalled();
+      errSpy.mockRestore();
+    });
+
+    it("does not call the use-case when there is no active subscription", async () => {
+      mockGetCurrentUserExecute.mockResolvedValue(user);
+      mockGetSubscriptionExecute.mockResolvedValue(null);
+      const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      await cancelSubscription();
+
+      expect(mockCancelSubscriptionExecute).not.toHaveBeenCalled();
+      expect(mockRevalidatePath).not.toHaveBeenCalled();
+      errSpy.mockRestore();
+    });
+
+    it("swallows use-case errors without revalidating", async () => {
+      mockGetCurrentUserExecute.mockResolvedValue(user);
+      mockGetSubscriptionExecute.mockResolvedValue(subscription);
+      mockCanManageBilling.mockResolvedValue(true);
+      mockCancelSubscriptionExecute.mockRejectedValue(new Error("API 500"));
+      const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      await cancelSubscription();
+
+      expect(mockRevalidatePath).not.toHaveBeenCalled();
+      expect(errSpy).toHaveBeenCalled();
+      errSpy.mockRestore();
+    });
+  });
+
+  describe("resumeSubscription", () => {
+    const user = { id: "u1" };
+    const subscription = {
+      id: "s1",
+      plan: { context: "team" },
+    };
+
+    it("calls the use-case and revalidates when the user is the billing member", async () => {
+      mockGetCurrentUserExecute.mockResolvedValue(user);
+      mockGetSubscriptionExecute.mockResolvedValue(subscription);
+      mockCanManageBilling.mockResolvedValue(true);
+      mockResumeSubscriptionExecute.mockResolvedValue(undefined);
+
+      await resumeSubscription();
+
+      expect(mockCanManageBilling).toHaveBeenCalledWith(user, subscription);
+      expect(mockResumeSubscriptionExecute).toHaveBeenCalledOnce();
+      expect(mockRevalidatePath).toHaveBeenCalledWith(
+        "/[locale]/subscription",
+        "page",
+      );
+    });
+
+    it("does not call the use-case when the user is not the billing member", async () => {
+      mockGetCurrentUserExecute.mockResolvedValue(user);
+      mockGetSubscriptionExecute.mockResolvedValue(subscription);
+      mockCanManageBilling.mockResolvedValue(false);
+      const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      await resumeSubscription();
+
+      expect(mockResumeSubscriptionExecute).not.toHaveBeenCalled();
+      expect(mockRevalidatePath).not.toHaveBeenCalled();
+      errSpy.mockRestore();
     });
   });
 });

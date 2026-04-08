@@ -64,10 +64,16 @@ export default async function PricingPage() {
     currentPlanId,
     labels: {
       upgrade: t("upgrade"),
-      downgrade: t("downgrade"),
       seat: t("seat"),
     },
-    renderCta: ({ plan, isCurrent, isTeam, unitPrice, ctaLabel }) => {
+    renderCta: ({
+      plan,
+      isCurrent,
+      isUpgrade,
+      isTeam,
+      unitPrice,
+      ctaLabel,
+    }) => {
       if (!plan.price) return null;
       const highlighted = plan.tier === "pro";
       if (!user) {
@@ -81,6 +87,7 @@ export default async function PricingPage() {
         );
       }
       if (isCurrent) return null;
+      if (!isUpgrade) return null;
       if (isTeam) {
         return (
           <TeamCheckoutButton

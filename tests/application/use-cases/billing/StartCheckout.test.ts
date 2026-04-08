@@ -11,6 +11,8 @@ function makeGateway(
       .fn()
       .mockResolvedValue({ url: "https://checkout.stripe.com/session_123" }),
     createBillingPortalSession: vi.fn(),
+    cancelSubscription: vi.fn(),
+    resumeSubscription: vi.fn(),
     ...overrides,
   };
 }

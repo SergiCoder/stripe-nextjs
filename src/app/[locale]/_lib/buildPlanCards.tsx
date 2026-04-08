@@ -2,7 +2,6 @@ import type { Plan, PlanTier } from "@/domain/models/Plan";
 
 export interface PlanCardLabels {
   upgrade: string;
-  downgrade: string;
   /** Singular noun for one seat (e.g. "seat"). Used in team interval labels. */
   seat: string;
 }
@@ -104,7 +103,7 @@ export function buildPlanCardGroups({
     const isCurrent = Boolean(currentPlanId) && plan.id === currentPlanId;
     const monthlyEq = monthlyEquivalent(plan);
     const isUpgrade = monthlyEq > currentMonthlyEq;
-    const ctaLabel = isUpgrade ? labels.upgrade : labels.downgrade;
+    const ctaLabel = labels.upgrade;
 
     const intervalLabel = isTeam
       ? `${labels.seat}/${plan.interval}`
