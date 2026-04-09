@@ -102,7 +102,9 @@
       "submit": "リセットリンクを送信",
       "successMessage": "そのメールアドレスにアカウントが存在する場合、パスワードリセットリンクがまもなく届きます。",
       "rememberPassword": "パスワードを覚えていますか？",
-      "backToLogin": "ログイン"
+      "backToLogin": "ログイン",
+      "invalidLink": "このリセットリンクは無効または期限切れです。",
+      "requestNewLink": "新しいリセットリンクをリクエスト"
     },
     "oauth": {
       "continueWithGoogle": "Googleで続行",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "彼女/Her",
     "pronounsTheyThem": "They/Them",
     "changePassword": "パスワード変更",
+    "currentPassword": "現在のパスワード",
     "newPassword": "新しいパスワード",
     "confirmPassword": "パスワードの確認",
     "passwordChangeSubmit": "パスワードを更新",

@@ -102,7 +102,9 @@
       "submit": "Send tilbakestillingslenke",
       "successMessage": "Hvis det finnes en konto med den e-postadressen, vil du snart motta en lenke for tilbakestilling av passord.",
       "rememberPassword": "Husker du passordet ditt?",
-      "backToLogin": "Logg inn"
+      "backToLogin": "Logg inn",
+      "invalidLink": "Denne tilbakestillingslenken er ugyldig eller utløpt.",
+      "requestNewLink": "Be om en ny tilbakestillingslenke"
     },
     "oauth": {
       "continueWithGoogle": "Fortsett med Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Hun/Henne",
     "pronounsTheyThem": "Hen",
     "changePassword": "Endre passord",
+    "currentPassword": "Nåværende passord",
     "newPassword": "Nytt passord",
     "confirmPassword": "Bekreft passord",
     "passwordChangeSubmit": "Oppdater passord",

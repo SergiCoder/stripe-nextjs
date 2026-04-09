@@ -102,7 +102,9 @@
       "submit": "Link zum Zurücksetzen senden",
       "successMessage": "Wenn ein Konto mit dieser E-Mail existiert, erhalten Sie in Kürze einen Link zum Zurücksetzen des Passworts.",
       "rememberPassword": "Erinnern Sie sich an Ihr Passwort?",
-      "backToLogin": "Anmelden"
+      "backToLogin": "Anmelden",
+      "invalidLink": "Dieser Link zum Zurücksetzen ist ungültig oder abgelaufen.",
+      "requestNewLink": "Neuen Link zum Zurücksetzen anfordern"
     },
     "oauth": {
       "continueWithGoogle": "Weiter mit Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Sie/Ihr",
     "pronounsTheyThem": "They/Them",
     "changePassword": "Passwort ändern",
+    "currentPassword": "Aktuelles Passwort",
     "newPassword": "Neues Passwort",
     "confirmPassword": "Passwort bestätigen",
     "passwordChangeSubmit": "Passwort aktualisieren",

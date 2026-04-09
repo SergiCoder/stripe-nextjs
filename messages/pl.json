@@ -102,7 +102,9 @@
       "submit": "Wyślij link resetujący",
       "successMessage": "Jeśli istnieje konto z tym adresem e-mail, wkrótce otrzymasz link do zresetowania hasła.",
       "rememberPassword": "Pamiętasz hasło?",
-      "backToLogin": "Zaloguj się"
+      "backToLogin": "Zaloguj się",
+      "invalidLink": "Ten link do resetowania jest nieprawidłowy lub wygasł.",
+      "requestNewLink": "Poproś o nowy link do resetowania"
     },
     "oauth": {
       "continueWithGoogle": "Kontynuuj z Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Ona/Jej",
     "pronounsTheyThem": "Ono/Ich",
     "changePassword": "Zmień hasło",
+    "currentPassword": "Obecne hasło",
     "newPassword": "Nowe hasło",
     "confirmPassword": "Potwierdź hasło",
     "passwordChangeSubmit": "Zaktualizuj hasło",

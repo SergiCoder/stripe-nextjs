@@ -102,7 +102,9 @@
       "submit": "Sıfırlama bağlantısı gönder",
       "successMessage": "Bu e-posta ile ilişkili bir hesap varsa, kısa süre içinde bir şifre sıfırlama bağlantısı alacaksınız.",
       "rememberPassword": "Şifrenizi hatırlıyor musunuz?",
-      "backToLogin": "Giriş yap"
+      "backToLogin": "Giriş yap",
+      "invalidLink": "Bu sıfırlama bağlantısı geçersiz veya süresi dolmuş.",
+      "requestNewLink": "Yeni bir sıfırlama bağlantısı iste"
     },
     "oauth": {
       "continueWithGoogle": "Google ile devam et",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "O (kadın)",
     "pronounsTheyThem": "O (nötr)",
     "changePassword": "Şifre değiştir",
+    "currentPassword": "Mevcut şifre",
     "newPassword": "Yeni şifre",
     "confirmPassword": "Şifreyi onaylayın",
     "passwordChangeSubmit": "Şifreyi güncelle",

@@ -102,7 +102,9 @@
       "submit": "Enviar link de redefinição",
       "successMessage": "Se existir uma conta com esse e-mail, você receberá um link para redefinição de senha em breve.",
       "rememberPassword": "Lembra da sua senha?",
-      "backToLogin": "Entrar"
+      "backToLogin": "Entrar",
+      "invalidLink": "Este link de redefinição é inválido ou expirou.",
+      "requestNewLink": "Solicitar um novo link de redefinição"
     },
     "oauth": {
       "continueWithGoogle": "Continuar com Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Ela/Dela",
     "pronounsTheyThem": "Elu/Delu",
     "changePassword": "Alterar senha",
+    "currentPassword": "Senha atual",
     "newPassword": "Nova senha",
     "confirmPassword": "Confirmar senha",
     "passwordChangeSubmit": "Atualizar senha",

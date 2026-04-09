@@ -102,7 +102,9 @@
       "submit": "재설정 링크 보내기",
       "successMessage": "해당 이메일로 등록된 계정이 있다면, 곧 비밀번호 재설정 링크를 받으실 수 있습니다.",
       "rememberPassword": "비밀번호가 기억나시나요?",
-      "backToLogin": "로그인"
+      "backToLogin": "로그인",
+      "invalidLink": "이 재설정 링크가 유효하지 않거나 만료되었습니다.",
+      "requestNewLink": "새 재설정 링크 요청"
     },
     "oauth": {
       "continueWithGoogle": "Google로 계속",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "그녀/Her",
     "pronounsTheyThem": "They/Them",
     "changePassword": "비밀번호 변경",
+    "currentPassword": "현재 비밀번호",
     "newPassword": "새 비밀번호",
     "confirmPassword": "비밀번호 확인",
     "passwordChangeSubmit": "비밀번호 업데이트",

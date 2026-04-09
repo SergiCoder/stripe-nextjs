@@ -111,7 +111,9 @@
       "confirmPassword": "Confirm password",
       "submit": "Reset password",
       "successMessage": "Your password has been updated. You can now sign in with your new password.",
-      "backToLogin": "Sign in"
+      "backToLogin": "Sign in",
+      "invalidLink": "This reset link is invalid or has expired.",
+      "requestNewLink": "Request a new reset link"
     },
     "verifyEmail": {
       "pageTitle": "Verify email",
@@ -232,6 +234,7 @@
     "pronounsSheHer": "She/Her",
     "pronounsTheyThem": "They/Them",
     "changePassword": "Change password",
+    "currentPassword": "Current password",
     "newPassword": "New password",
     "confirmPassword": "Confirm password",
     "passwordChangeSubmit": "Update password",

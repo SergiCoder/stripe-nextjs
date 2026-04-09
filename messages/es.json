@@ -102,7 +102,9 @@
       "submit": "Enviar enlace de restablecimiento",
       "successMessage": "Si existe una cuenta con ese correo electrónico, recibirás un enlace para restablecer tu contraseña en breve.",
       "rememberPassword": "¿Recuerdas tu contraseña?",
-      "backToLogin": "Iniciar sesión"
+      "backToLogin": "Iniciar sesión",
+      "invalidLink": "Este enlace de restablecimiento no es válido o ha expirado.",
+      "requestNewLink": "Solicitar un nuevo enlace de restablecimiento"
     },
     "oauth": {
       "continueWithGoogle": "Continuar con Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Ella",
     "pronounsTheyThem": "Elle",
     "changePassword": "Cambiar contraseña",
+    "currentPassword": "Contraseña actual",
     "newPassword": "Nueva contraseña",
     "confirmPassword": "Confirmar contraseña",
     "passwordChangeSubmit": "Actualizar contraseña",

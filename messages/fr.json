@@ -102,7 +102,9 @@
       "submit": "Envoyer le lien de réinitialisation",
       "successMessage": "Si un compte existe avec cette adresse e-mail, vous recevrez bientôt un lien de réinitialisation de mot de passe.",
       "rememberPassword": "Vous vous souvenez de votre mot de passe ?",
-      "backToLogin": "Se connecter"
+      "backToLogin": "Se connecter",
+      "invalidLink": "Ce lien de réinitialisation est invalide ou a expiré.",
+      "requestNewLink": "Demander un nouveau lien de réinitialisation"
     },
     "oauth": {
       "continueWithGoogle": "Continuer avec Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Elle",
     "pronounsTheyThem": "Iel",
     "changePassword": "Changer le mot de passe",
+    "currentPassword": "Mot de passe actuel",
     "newPassword": "Nouveau mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
     "passwordChangeSubmit": "Mettre à jour le mot de passe",

@@ -102,7 +102,9 @@
       "submit": "Resetlink versturen",
       "successMessage": "Als er een account bestaat met dat e-mailadres, ontvang je binnenkort een link om je wachtwoord te resetten.",
       "rememberPassword": "Weet je je wachtwoord nog?",
-      "backToLogin": "Inloggen"
+      "backToLogin": "Inloggen",
+      "invalidLink": "Deze herstelkoppeling is ongeldig of verlopen.",
+      "requestNewLink": "Vraag een nieuwe herstelkoppeling aan"
     },
     "oauth": {
       "continueWithGoogle": "Doorgaan met Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Zij/Haar",
     "pronounsTheyThem": "Hen/Hun",
     "changePassword": "Wachtwoord wijzigen",
+    "currentPassword": "Huidig wachtwoord",
     "newPassword": "Nieuw wachtwoord",
     "confirmPassword": "Wachtwoord bevestigen",
     "passwordChangeSubmit": "Wachtwoord bijwerken",

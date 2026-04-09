@@ -102,7 +102,9 @@
       "submit": "Send nulstillingslink",
       "successMessage": "Hvis der findes en konto med den e-mail, vil du snart modtage et link til nulstilling af adgangskode.",
       "rememberPassword": "Husker du din adgangskode?",
-      "backToLogin": "Log ind"
+      "backToLogin": "Log ind",
+      "invalidLink": "Dette nulstillingslink er ugyldigt eller udløbet.",
+      "requestNewLink": "Anmod om et nyt nulstillingslink"
     },
     "oauth": {
       "continueWithGoogle": "Fortsæt med Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Hun/Hende",
     "pronounsTheyThem": "De/Dem",
     "changePassword": "Skift adgangskode",
+    "currentPassword": "Nuværende adgangskode",
     "newPassword": "Ny adgangskode",
     "confirmPassword": "Bekræft adgangskode",
     "passwordChangeSubmit": "Opdater adgangskode",

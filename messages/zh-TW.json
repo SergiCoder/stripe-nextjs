@@ -102,7 +102,9 @@
       "submit": "發送重設連結",
       "successMessage": "如果該電子郵件存在對應帳戶，您將很快收到密碼重設連結。",
       "rememberPassword": "記得密碼？",
-      "backToLogin": "登入"
+      "backToLogin": "登入",
+      "invalidLink": "此重設連結無效或已過期。",
+      "requestNewLink": "請求新的重設連結"
     },
     "oauth": {
       "continueWithGoogle": "使用 Google 繼續",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "她/Her",
     "pronounsTheyThem": "They/Them",
     "changePassword": "變更密碼",
+    "currentPassword": "目前密碼",
     "newPassword": "新密碼",
     "confirmPassword": "確認密碼",
     "passwordChangeSubmit": "更新密碼",

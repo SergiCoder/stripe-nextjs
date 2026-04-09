@@ -102,7 +102,9 @@
       "submit": "Отправить ссылку для сброса",
       "successMessage": "Если учётная запись с таким email существует, вы скоро получите ссылку для сброса пароля.",
       "rememberPassword": "Помните пароль?",
-      "backToLogin": "Войти"
+      "backToLogin": "Войти",
+      "invalidLink": "Эта ссылка для сброса недействительна или истекла.",
+      "requestNewLink": "Запросить новую ссылку для сброса"
     },
     "oauth": {
       "continueWithGoogle": "Продолжить с Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Она/Её",
     "pronounsTheyThem": "Они/Их",
     "changePassword": "Изменить пароль",
+    "currentPassword": "Текущий пароль",
     "newPassword": "Новый пароль",
     "confirmPassword": "Подтвердите пароль",
     "passwordChangeSubmit": "Обновить пароль",

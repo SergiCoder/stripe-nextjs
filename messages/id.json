@@ -102,7 +102,9 @@
       "submit": "Kirim tautan atur ulang",
       "successMessage": "Jika ada akun dengan email tersebut, Anda akan segera menerima tautan pengaturan ulang kata sandi.",
       "rememberPassword": "Ingat kata sandi Anda?",
-      "backToLogin": "Masuk"
+      "backToLogin": "Masuk",
+      "invalidLink": "Tautan reset ini tidak valid atau sudah kedaluwarsa.",
+      "requestNewLink": "Minta tautan reset baru"
     },
     "oauth": {
       "continueWithGoogle": "Lanjutkan dengan Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Dia (perempuan)",
     "pronounsTheyThem": "Mereka",
     "changePassword": "Ubah kata sandi",
+    "currentPassword": "Kata sandi saat ini",
     "newPassword": "Kata sandi baru",
     "confirmPassword": "Konfirmasi kata sandi",
     "passwordChangeSubmit": "Perbarui kata sandi",

@@ -102,7 +102,9 @@
       "submit": "Invia link di reimpostazione",
       "successMessage": "Se esiste un account con quella email, riceverai a breve un link per reimpostare la password.",
       "rememberPassword": "Ricordi la tua password?",
-      "backToLogin": "Accedi"
+      "backToLogin": "Accedi",
+      "invalidLink": "Questo link di reimpostazione non è valido o è scaduto.",
+      "requestNewLink": "Richiedi un nuovo link di reimpostazione"
     },
     "oauth": {
       "continueWithGoogle": "Continua con Google",
@@ -233,6 +235,7 @@
     "pronounsSheHer": "Lei",
     "pronounsTheyThem": "Their",
     "changePassword": "Cambia password",
+    "currentPassword": "Password attuale",
     "newPassword": "Nuova password",
     "confirmPassword": "Conferma password",
     "passwordChangeSubmit": "Aggiorna password",
