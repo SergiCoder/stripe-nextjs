@@ -1,3 +1,5 @@
+export type RegistrationMethod = "email" | "google" | "github" | "microsoft";
+
 export interface User {
   id: string;
   email: string;
@@ -13,5 +15,9 @@ export interface User {
   pronouns: string | null;
   bio: string | null;
   isVerified: boolean;
+  registrationMethod: RegistrationMethod;
+  linkedProviders: string[];
   createdAt: string;
+  updatedAt: string;
+  scheduledDeletionAt: string | null;
 }
