@@ -136,6 +136,14 @@
       "submit": "Redefinir senha",
       "successMessage": "Sua senha foi atualizada. Agora você pode entrar com sua nova senha.",
       "backToLogin": "Entrar"
+    },
+    "verifyEmail": {
+      "pageTitle": "Verificar e-mail",
+      "title": "Verificando seu e-mail",
+      "verifying": "Por favor, aguarde enquanto verificamos seu endereço de e-mail...",
+      "success": "Seu e-mail foi verificado. Redirecionando para seu painel...",
+      "error": "A verificação do e-mail falhou. O link pode ter expirado.",
+      "backToLogin": "Voltar para o login"
     }
   },
   "dashboard": {

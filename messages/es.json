@@ -136,6 +136,14 @@
       "submit": "Restablecer contraseña",
       "successMessage": "Tu contraseña ha sido actualizada. Ahora puedes iniciar sesión con tu nueva contraseña.",
       "backToLogin": "Iniciar sesión"
+    },
+    "verifyEmail": {
+      "pageTitle": "Verificar correo",
+      "title": "Verificando tu correo electrónico",
+      "verifying": "Por favor espera mientras verificamos tu dirección de correo electrónico...",
+      "success": "Tu correo electrónico ha sido verificado. Redirigiendo a tu panel de control...",
+      "error": "La verificación del correo electrónico falló. El enlace puede haber expirado.",
+      "backToLogin": "Volver a iniciar sesión"
     }
   },
   "dashboard": {

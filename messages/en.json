@@ -113,6 +113,14 @@
       "successMessage": "Your password has been updated. You can now sign in with your new password.",
       "backToLogin": "Sign in"
     },
+    "verifyEmail": {
+      "pageTitle": "Verify email",
+      "title": "Verifying your email",
+      "verifying": "Please wait while we verify your email address...",
+      "success": "Your email has been verified. Redirecting to your dashboard...",
+      "error": "Email verification failed. The link may have expired.",
+      "backToLogin": "Back to sign in"
+    },
     "oauth": {
       "continueWithGoogle": "Continue with Google",
       "continueWithGitHub": "Continue with GitHub",

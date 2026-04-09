@@ -136,6 +136,14 @@
       "submit": "Şifreyi sıfırla",
       "successMessage": "Şifreniz güncellendi. Artık yeni şifrenizle giriş yapabilirsiniz.",
       "backToLogin": "Giriş yap"
+    },
+    "verifyEmail": {
+      "pageTitle": "E-posta doğrula",
+      "title": "E-postanız doğrulanıyor",
+      "verifying": "E-posta adresinizi doğrularken lütfen bekleyin...",
+      "success": "E-postanız doğrulandı. Kontrol panelinize yönlendiriliyorsunuz...",
+      "error": "E-posta doğrulaması başarısız oldu. Bağlantının süresi dolmuş olabilir.",
+      "backToLogin": "Girişe dön"
     }
   },
   "dashboard": {

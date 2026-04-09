@@ -136,6 +136,14 @@
       "submit": "Zresetuj hasło",
       "successMessage": "Twoje hasło zostało zaktualizowane. Możesz teraz zalogować się nowym hasłem.",
       "backToLogin": "Zaloguj się"
+    },
+    "verifyEmail": {
+      "pageTitle": "Zweryfikuj e-mail",
+      "title": "Weryfikacja Twojego e-maila",
+      "verifying": "Proszę czekać, trwa weryfikacja Twojego adresu e-mail...",
+      "success": "Twój e-mail został zweryfikowany. Przekierowywanie do panelu...",
+      "error": "Weryfikacja e-maila nie powiodła się. Link mógł wygasnąć.",
+      "backToLogin": "Powrót do logowania"
     }
   },
   "dashboard": {

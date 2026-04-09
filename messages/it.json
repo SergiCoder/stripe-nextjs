@@ -136,6 +136,14 @@
       "submit": "Reimposta password",
       "successMessage": "La tua password è stata aggiornata. Ora puoi accedere con la tua nuova password.",
       "backToLogin": "Accedi"
+    },
+    "verifyEmail": {
+      "pageTitle": "Verifica email",
+      "title": "Verifica della tua email",
+      "verifying": "Attendere mentre verifichiamo il tuo indirizzo email...",
+      "success": "La tua email è stata verificata. Reindirizzamento alla dashboard...",
+      "error": "Verifica email fallita. Il link potrebbe essere scaduto.",
+      "backToLogin": "Torna all'accesso"
     }
   },
   "dashboard": {

@@ -136,6 +136,14 @@
       "submit": "Återställ lösenord",
       "successMessage": "Ditt lösenord har uppdaterats. Du kan nu logga in med ditt nya lösenord.",
       "backToLogin": "Logga in"
+    },
+    "verifyEmail": {
+      "pageTitle": "Verifiera e-post",
+      "title": "Verifierar din e-post",
+      "verifying": "Vänta medan vi verifierar din e-postadress...",
+      "success": "Din e-post har verifierats. Omdirigerar till din instrumentpanel...",
+      "error": "E-postverifiering misslyckades. Länken kan ha löpt ut.",
+      "backToLogin": "Tillbaka till inloggning"
     }
   },
   "dashboard": {

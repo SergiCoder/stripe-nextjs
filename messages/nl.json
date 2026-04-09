@@ -136,6 +136,14 @@
       "submit": "Wachtwoord resetten",
       "successMessage": "Je wachtwoord is bijgewerkt. Je kunt nu inloggen met je nieuwe wachtwoord.",
       "backToLogin": "Inloggen"
+    },
+    "verifyEmail": {
+      "pageTitle": "E-mail verifiëren",
+      "title": "Uw e-mail wordt geverifieerd",
+      "verifying": "Even geduld terwijl we uw e-mailadres verifiëren...",
+      "success": "Uw e-mail is geverifieerd. U wordt doorgestuurd naar uw dashboard...",
+      "error": "E-mailverificatie mislukt. De link is mogelijk verlopen.",
+      "backToLogin": "Terug naar inloggen"
     }
   },
   "dashboard": {

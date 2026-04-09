@@ -136,6 +136,14 @@
       "submit": "Atur ulang kata sandi",
       "successMessage": "Kata sandi Anda telah diperbarui. Anda sekarang dapat masuk dengan kata sandi baru Anda.",
       "backToLogin": "Masuk"
+    },
+    "verifyEmail": {
+      "pageTitle": "Verifikasi email",
+      "title": "Memverifikasi email Anda",
+      "verifying": "Mohon tunggu sementara kami memverifikasi alamat email Anda...",
+      "success": "Email Anda telah diverifikasi. Mengalihkan ke dasbor Anda...",
+      "error": "Verifikasi email gagal. Tautan mungkin telah kedaluwarsa.",
+      "backToLogin": "Kembali ke masuk"
     }
   },
   "dashboard": {

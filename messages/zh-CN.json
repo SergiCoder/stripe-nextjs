@@ -136,6 +136,14 @@
       "submit": "重置密码",
       "successMessage": "您的密码已更新。您现在可以使用新密码登录。",
       "backToLogin": "登录"
+    },
+    "verifyEmail": {
+      "pageTitle": "验证邮箱",
+      "title": "正在验证您的邮箱",
+      "verifying": "请稍候，我们正在验证您的邮箱地址...",
+      "success": "您的邮箱已验证。正在跳转到控制面板...",
+      "error": "邮箱验证失败。链接可能已过期。",
+      "backToLogin": "返回登录"
     }
   },
   "dashboard": {

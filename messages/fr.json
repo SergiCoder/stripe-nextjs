@@ -136,6 +136,14 @@
       "submit": "Réinitialiser le mot de passe",
       "successMessage": "Votre mot de passe a été mis à jour. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
       "backToLogin": "Se connecter"
+    },
+    "verifyEmail": {
+      "pageTitle": "Vérifier l'e-mail",
+      "title": "Vérification de votre e-mail",
+      "verifying": "Veuillez patienter pendant que nous vérifions votre adresse e-mail...",
+      "success": "Votre e-mail a été vérifié. Redirection vers votre tableau de bord...",
+      "error": "La vérification de l'e-mail a échoué. Le lien a peut-être expiré.",
+      "backToLogin": "Retour à la connexion"
     }
   },
   "dashboard": {

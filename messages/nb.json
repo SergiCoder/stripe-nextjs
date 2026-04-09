@@ -136,6 +136,14 @@
       "submit": "Tilbakestill passord",
       "successMessage": "Passordet ditt er oppdatert. Du kan nå logge inn med det nye passordet.",
       "backToLogin": "Logg inn"
+    },
+    "verifyEmail": {
+      "pageTitle": "Bekreft e-post",
+      "title": "Bekrefter e-posten din",
+      "verifying": "Vennligst vent mens vi bekrefter e-postadressen din...",
+      "success": "E-posten din er bekreftet. Omdirigerer til dashbordet ditt...",
+      "error": "E-postbekreftelse mislyktes. Lenken kan ha utløpt.",
+      "backToLogin": "Tilbake til innlogging"
     }
   },
   "dashboard": {

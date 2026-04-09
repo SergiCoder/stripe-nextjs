@@ -136,6 +136,14 @@
       "submit": "Nulstil adgangskode",
       "successMessage": "Din adgangskode er blevet opdateret. Du kan nu logge ind med din nye adgangskode.",
       "backToLogin": "Log ind"
+    },
+    "verifyEmail": {
+      "pageTitle": "Bekræft e-mail",
+      "title": "Bekræfter din e-mail",
+      "verifying": "Vent venligst mens vi bekræfter din e-mailadresse...",
+      "success": "Din e-mail er blevet bekræftet. Omdirigerer til dit dashboard...",
+      "error": "E-mailbekræftelse mislykkedes. Linket er muligvis udløbet.",
+      "backToLogin": "Tilbage til login"
     }
   },
   "dashboard": {

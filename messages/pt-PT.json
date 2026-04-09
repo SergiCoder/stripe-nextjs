@@ -136,6 +136,14 @@
       "submit": "Redefinir palavra-passe",
       "successMessage": "A sua palavra-passe foi atualizada. Pode agora iniciar sessão com a nova palavra-passe.",
       "backToLogin": "Iniciar sessão"
+    },
+    "verifyEmail": {
+      "pageTitle": "Verificar e-mail",
+      "title": "A verificar o seu e-mail",
+      "verifying": "Por favor aguarde enquanto verificamos o seu endereço de e-mail...",
+      "success": "O seu e-mail foi verificado. A redirecionar para o seu painel...",
+      "error": "A verificação do e-mail falhou. O link pode ter expirado.",
+      "backToLogin": "Voltar para o início de sessão"
     }
   },
   "dashboard": {

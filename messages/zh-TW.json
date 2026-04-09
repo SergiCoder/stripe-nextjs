@@ -136,6 +136,14 @@
       "submit": "重設密碼",
       "successMessage": "您的密碼已更新。您現在可以使用新密碼登入。",
       "backToLogin": "登入"
+    },
+    "verifyEmail": {
+      "pageTitle": "驗證電子郵件",
+      "title": "正在驗證您的電子郵件",
+      "verifying": "請稍候，我們正在驗證您的電子郵件地址...",
+      "success": "您的電子郵件已驗證。正在跳轉到控制面板...",
+      "error": "電子郵件驗證失敗。連結可能已過期。",
+      "backToLogin": "返回登入"
     }
   },
   "dashboard": {

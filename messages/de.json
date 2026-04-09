@@ -136,6 +136,14 @@
       "submit": "Passwort zurücksetzen",
       "successMessage": "Ihr Passwort wurde aktualisiert. Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
       "backToLogin": "Anmelden"
+    },
+    "verifyEmail": {
+      "pageTitle": "E-Mail bestätigen",
+      "title": "Ihre E-Mail wird bestätigt",
+      "verifying": "Bitte warten Sie, während wir Ihre E-Mail-Adresse bestätigen...",
+      "success": "Ihre E-Mail wurde bestätigt. Sie werden zum Dashboard weitergeleitet...",
+      "error": "E-Mail-Bestätigung fehlgeschlagen. Der Link ist möglicherweise abgelaufen.",
+      "backToLogin": "Zurück zur Anmeldung"
     }
   },
   "dashboard": {
