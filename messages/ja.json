@@ -217,6 +217,7 @@
     "avatarRemove": "削除",
     "avatarError": "アバターの更新に失敗しました",
     "save": "変更を保存",
+    "saved": "変更を保存しました",
     "danger": "危険な操作",
     "deleteAccount": "アカウントを削除",
     "deleteConfirm": "アカウントとすべてのデータが完全に削除されます。",

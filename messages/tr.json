@@ -217,6 +217,7 @@
     "avatarRemove": "Kaldır",
     "avatarError": "Avatar güncellenemedi",
     "save": "Değişiklikleri kaydet",
+    "saved": "Değişiklikler kaydedildi",
     "danger": "Tehlikeli bölge",
     "deleteAccount": "Hesabı sil",
     "deleteConfirm": "Bu işlem hesabınızı ve tüm verilerinizi kalıcı olarak silecektir.",

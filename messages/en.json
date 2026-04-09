@@ -216,6 +216,7 @@
     "avatarRemove": "Remove",
     "avatarError": "Failed to update avatar",
     "save": "Save changes",
+    "saved": "Changes saved",
     "danger": "Danger zone",
     "deleteAccount": "Delete account",
     "deleteConfirm": "This will permanently delete your account and all data.",

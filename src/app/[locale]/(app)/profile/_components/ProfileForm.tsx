@@ -74,9 +74,17 @@ export function ProfileForm({ user, phonePrefixes }: ProfileFormProps) {
   const [avatarUploading, setAvatarUploading] = useState(false);
   const [avatarError, setAvatarError] = useState<string | null>(null);
   const [dirty, setDirty] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [formKey, setFormKey] = useState(0);
 
   useEffect(() => {
-    if (state?.success) setDirty(false);
+    if (state?.success) {
+      setDirty(false);
+      setSaved(true);
+      setFormKey((k) => k + 1);
+    } else {
+      setSaved(false);
+    }
   }, [state]);
 
   async function handleAvatarChange(file: File | null) {
@@ -86,7 +94,7 @@ export function ProfileForm({ user, phonePrefixes }: ProfileFormProps) {
       if (file) {
         const compressed = await compressImage(file);
         const formData = new FormData();
-        formData.append("file", compressed, "avatar.webp");
+        formData.append("avatar", compressed, "avatar.webp");
         const result = await uploadAvatar(formData);
         if (result.error) {
           setAvatarError(result.error);
@@ -115,6 +123,7 @@ export function ProfileForm({ user, phonePrefixes }: ProfileFormProps) {
 
   return (
     <form
+      key={formKey}
       action={formAction}
       onChange={(e) => {
         if ((e.target as HTMLElement).closest("[data-auto-save]")) return;
@@ -123,9 +132,7 @@ export function ProfileForm({ user, phonePrefixes }: ProfileFormProps) {
       className="space-y-6"
     >
       {state?.error && <AlertBanner variant="error">{state.error}</AlertBanner>}
-      {state?.success && (
-        <AlertBanner variant="success">{t("save")}</AlertBanner>
-      )}
+      {saved && <AlertBanner variant="success">{t("saved")}</AlertBanner>}
 
       <AvatarUpload
         currentSrc={avatarUrl}

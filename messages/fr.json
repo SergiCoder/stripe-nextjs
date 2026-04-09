@@ -217,6 +217,7 @@
     "avatarRemove": "Supprimer",
     "avatarError": "Échec de la mise à jour de l'avatar",
     "save": "Enregistrer les modifications",
+    "saved": "Modifications enregistrées",
     "danger": "Zone de danger",
     "deleteAccount": "Supprimer le compte",
     "deleteConfirm": "Cela supprimera définitivement votre compte et toutes vos données.",

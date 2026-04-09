@@ -217,6 +217,7 @@
     "avatarRemove": "Fjern",
     "avatarError": "Kunne ikke oppdatere avatar",
     "save": "Lagre endringer",
+    "saved": "Endringer lagret",
     "danger": "Faresone",
     "deleteAccount": "Slett konto",
     "deleteConfirm": "Dette vil permanent slette kontoen din og alle data.",

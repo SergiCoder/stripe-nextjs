@@ -217,6 +217,7 @@
     "avatarRemove": "Ta bort",
     "avatarError": "Kunde inte uppdatera avatar",
     "save": "Spara ändringar",
+    "saved": "Ändringar sparade",
     "danger": "Farozon",
     "deleteAccount": "Radera konto",
     "deleteConfirm": "Detta raderar ditt konto och all data permanent.",
