@@ -58,7 +58,6 @@ export async function proxy(request: NextRequest) {
           const data = (await res.json()) as {
             access_token: string;
             refresh_token: string;
-            expires_in: number;
           };
           accessToken = data.access_token;
 
@@ -67,7 +66,7 @@ export async function proxy(request: NextRequest) {
             httpOnly: true,
             secure: isProduction,
             sameSite: "lax",
-            maxAge: data.expires_in,
+            maxAge: 15 * 60, // 15 minutes
             path: "/",
           });
           intlResponse.cookies.set("refresh_token", data.refresh_token, {

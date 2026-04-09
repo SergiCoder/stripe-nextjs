@@ -5,10 +5,12 @@ const REFRESH_TOKEN = "refresh_token";
 
 const isProduction = process.env.NODE_ENV === "production";
 
+/** Access token TTL: 15 minutes. */
+const ACCESS_TOKEN_MAX_AGE = 15 * 60;
+
 export async function setAuthCookies(
   accessToken: string,
   refreshToken: string,
-  expiresIn: number,
 ): Promise<void> {
   const cookieStore = await cookies();
 
@@ -16,7 +18,7 @@ export async function setAuthCookies(
     httpOnly: true,
     secure: isProduction,
     sameSite: "lax",
-    maxAge: expiresIn,
+    maxAge: ACCESS_TOKEN_MAX_AGE,
     path: "/",
   });
 
