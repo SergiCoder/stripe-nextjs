@@ -210,6 +210,12 @@ export async function verifyEmail(token: string): Promise<{ error?: string }> {
 }
 
 export async function signOut() {
-  await new SignOut(authGateway).execute();
+  try {
+    await new SignOut(authGateway).execute();
+  } catch {
+    // Session already expired — clear cookies and redirect anyway
+    const { clearAuthCookies } = await import("@/infrastructure/auth/cookies");
+    await clearAuthCookies();
+  }
   redirect("/login");
 }

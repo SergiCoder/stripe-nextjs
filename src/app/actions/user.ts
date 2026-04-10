@@ -4,16 +4,35 @@ import { revalidatePath } from "next/cache";
 import { GetCurrentUser } from "@/application/use-cases/auth/GetCurrentUser";
 import { DeleteAccount } from "@/application/use-cases/auth/DeleteAccount";
 import { UpdateUserProfile } from "@/application/use-cases/user/UpdateUserProfile";
+import { AuthError } from "@/domain/errors/AuthError";
 import { authGateway, userGateway } from "@/infrastructure/registry";
 
-export async function updateAvatarUrl(avatarUrl: string | null) {
-  const user = await new GetCurrentUser(authGateway).execute();
-  await new UpdateUserProfile(userGateway).execute(user.id, { avatarUrl });
+export async function updateAvatarUrl(
+  avatarUrl: string | null,
+): Promise<{ error?: string }> {
+  try {
+    const user = await new GetCurrentUser(authGateway).execute();
+    await new UpdateUserProfile(userGateway).execute(user.id, { avatarUrl });
+  } catch (err) {
+    if (err instanceof AuthError) {
+      return { error: "Session expired. Please log in again." };
+    }
+    return { error: "Failed to update avatar" };
+  }
   revalidatePath("/", "layout");
+  return {};
 }
 
 export async function updateProfile(_prevState: unknown, formData: FormData) {
-  const user = await new GetCurrentUser(authGateway).execute();
+  let user;
+  try {
+    user = await new GetCurrentUser(authGateway).execute();
+  } catch (err) {
+    if (err instanceof AuthError) {
+      return { error: "Session expired. Please log in again." };
+    }
+    return { error: "Failed to load profile" };
+  }
 
   const fullName = formData.get("fullName");
   const preferredLocale = formData.get("preferredLocale");
