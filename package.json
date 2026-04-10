@@ -18,10 +18,10 @@
     "@stripe/stripe-js": "^9.1.0",
     "@tailwindcss/forms": "^0.5.11",
     "gray-matter": "^4.0.3",
-    "next": "16.2.2",
+    "next": "16.2.3",
     "next-intl": "^4.9.1",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
   },
   "//": "pnpm.overrides pins vite above CVE range 8.0.0-8.0.4; drop once vitest bumps its peer range",
   "pnpm": {
@@ -41,7 +41,7 @@
     "@vitest/coverage-v8": "^4.1.4",
     "autoprefixer": "^10.4.27",
     "eslint": "^9.39.4",
-    "eslint-config-next": "16.2.2",
+    "eslint-config-next": "16.2.3",
     "jsdom": "^29.0.2",
     "postcss": "^8.5.9",
     "prettier": "^3.8.2",
