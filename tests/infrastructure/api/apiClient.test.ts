@@ -50,7 +50,7 @@ describe("apiFetch", () => {
     await apiFetch("/account/");
 
     expect(fetchSpy).toHaveBeenCalledWith(
-      "http://localhost:8001/api/v1/account/",
+      "https://localhost:8443/api/v1/account/",
       expect.any(Object),
     );
   });
@@ -227,7 +227,7 @@ describe("publicApiFetch", () => {
     const result = await publicApiFetch("/billing/plans/");
 
     expect(fetchSpy).toHaveBeenCalledWith(
-      "http://localhost:8001/api/v1/billing/plans/",
+      "https://localhost:8443/api/v1/billing/plans/",
       expect.any(Object),
     );
     const headers = fetchSpy.mock.calls[0][1].headers;

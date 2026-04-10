@@ -3,7 +3,7 @@
 import { getAuthToken } from "@/infrastructure/api/apiClient";
 import { AuthError } from "@/domain/errors/AuthError";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://localhost:8443";
 
 export async function uploadAvatar(
   formData: FormData,

@@ -14,9 +14,12 @@ const isDev = process.env.NODE_ENV === "development";
 
 const config: NextConfig = {
   images: {
-    remotePatterns: apiHostname
-      ? [{ protocol: apiProtocol, hostname: apiHostname }]
-      : [],
+    remotePatterns: [
+      ...(apiHostname
+        ? [{ protocol: apiProtocol, hostname: apiHostname }]
+        : []),
+      ...(isDev ? [{ hostname: "localhost" }] : []),
+    ],
     ...(isDev && { dangerouslyAllowLocalIP: true }),
   },
 };

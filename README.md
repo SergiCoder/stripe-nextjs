@@ -35,7 +35,7 @@ pnpm test             # run all tests once
 pnpm test:coverage    # run tests with v8 coverage report
 ```
 
-The backend ([SaaSmint Core](https://github.com/SergiCoder/SaaSmint-Core)) must be running on `http://localhost:8001`.
+The backend ([SaaSmint Core](https://github.com/SergiCoder/SaaSmint-Core)) must be running on `http://localhost:8443`.
 
 ## Environment variables
 

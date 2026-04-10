@@ -142,7 +142,7 @@ describe("proxy", () => {
       const response = await proxy(request);
 
       expect(fetchSpy).toHaveBeenCalledWith(
-        "http://localhost:8001/api/v1/auth/refresh/",
+        "https://localhost:8443/api/v1/auth/refresh/",
         expect.objectContaining({
           method: "POST",
           body: JSON.stringify({ refresh_token: "old-refresh-tok" }),
