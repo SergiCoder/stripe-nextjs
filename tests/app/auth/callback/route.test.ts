@@ -3,8 +3,10 @@ import { NextRequest } from "next/server";
 
 import { GET } from "@/app/[locale]/auth/callback/route";
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL!;
+
 function makeRequest(params: Record<string, string>) {
-  const url = new URL("http://localhost:3000/en/auth/callback");
+  const url = new URL(`${APP_URL}/en/auth/callback`);
   for (const [k, v] of Object.entries(params)) {
     url.searchParams.set(k, v);
   }

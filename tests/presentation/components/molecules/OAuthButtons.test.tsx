@@ -16,6 +16,8 @@ vi.mock("next-intl", () => ({
 
 import { OAuthButtons } from "@/presentation/components/molecules/OAuthButtons";
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL!;
+
 describe("OAuthButtons", () => {
   let locationAssignSpy: ReturnType<typeof vi.fn>;
 
@@ -24,8 +26,8 @@ describe("OAuthButtons", () => {
     locationAssignSpy = vi.fn();
     Object.defineProperty(window, "location", {
       value: {
-        href: "http://localhost:3000/en/login",
-        origin: "http://localhost:3000",
+        href: `${APP_URL}/en/login`,
+        origin: APP_URL,
         assign: locationAssignSpy,
       },
       writable: true,

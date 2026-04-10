@@ -27,11 +27,14 @@ function makeToken(exp: number): string {
   return `${header}.${payload}.signature`;
 }
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL!;
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+
 function createMockRequest(
   url: string,
   cookies: { name: string; value: string }[] = [],
 ): NextRequest {
-  const parsedUrl = new URL(url, "http://localhost:3000");
+  const parsedUrl = new URL(url, APP_URL);
   return {
     nextUrl: parsedUrl,
     url: parsedUrl.toString(),
@@ -50,7 +53,7 @@ beforeEach(() => {
 describe("proxy", () => {
   describe("protected routes", () => {
     it("redirects to login when no access_token cookie on /dashboard", async () => {
-      const request = createMockRequest("http://localhost:3000/en/dashboard");
+      const request = createMockRequest(`${APP_URL}/en/dashboard`);
       const response = await proxy(request);
 
       expect(response.status).toBe(307);
@@ -59,9 +62,7 @@ describe("proxy", () => {
     });
 
     it("redirects to login when no access_token cookie on /subscription", async () => {
-      const request = createMockRequest(
-        "http://localhost:3000/en/subscription",
-      );
+      const request = createMockRequest(`${APP_URL}/en/subscription`);
       const response = await proxy(request);
 
       expect(response.status).toBe(307);
@@ -69,7 +70,7 @@ describe("proxy", () => {
     });
 
     it("redirects to login when no access_token cookie on /profile", async () => {
-      const request = createMockRequest("http://localhost:3000/en/profile");
+      const request = createMockRequest(`${APP_URL}/en/profile`);
       const response = await proxy(request);
 
       expect(response.status).toBe(307);
@@ -77,7 +78,7 @@ describe("proxy", () => {
     });
 
     it("redirects to login when no access_token cookie on /org", async () => {
-      const request = createMockRequest("http://localhost:3000/en/org");
+      const request = createMockRequest(`${APP_URL}/en/org`);
       const response = await proxy(request);
 
       expect(response.status).toBe(307);
@@ -85,7 +86,7 @@ describe("proxy", () => {
     });
 
     it("redirects to login when no access_token cookie on /admin", async () => {
-      const request = createMockRequest("http://localhost:3000/en/admin");
+      const request = createMockRequest(`${APP_URL}/en/admin`);
       const response = await proxy(request);
 
       expect(response.status).toBe(307);
@@ -94,7 +95,7 @@ describe("proxy", () => {
 
     it("allows through when access_token is valid", async () => {
       const futureExp = Math.floor(Date.now() / 1000) + 600; // 10 min from now
-      const request = createMockRequest("http://localhost:3000/en/dashboard", [
+      const request = createMockRequest(`${APP_URL}/en/dashboard`, [
         { name: "access_token", value: makeToken(futureExp) },
       ]);
       const response = await proxy(request);
@@ -104,7 +105,7 @@ describe("proxy", () => {
     });
 
     it("preserves locale when redirecting to login", async () => {
-      const request = createMockRequest("http://localhost:3000/es/dashboard");
+      const request = createMockRequest(`${APP_URL}/es/dashboard`);
       const response = await proxy(request);
 
       expect(response.headers.get("location")).toContain("/es/login");
@@ -112,7 +113,7 @@ describe("proxy", () => {
 
     it("redirects to login when access_token is expired and no refresh_token", async () => {
       const pastExp = Math.floor(Date.now() / 1000) - 60;
-      const request = createMockRequest("http://localhost:3000/en/dashboard", [
+      const request = createMockRequest(`${APP_URL}/en/dashboard`, [
         { name: "access_token", value: makeToken(pastExp) },
       ]);
       const response = await proxy(request);
@@ -135,14 +136,14 @@ describe("proxy", () => {
           }),
       });
 
-      const request = createMockRequest("http://localhost:3000/en/dashboard", [
+      const request = createMockRequest(`${APP_URL}/en/dashboard`, [
         { name: "access_token", value: makeToken(pastExp) },
         { name: "refresh_token", value: "old-refresh-tok" },
       ]);
       const response = await proxy(request);
 
       expect(fetchSpy).toHaveBeenCalledWith(
-        "https://localhost:8443/api/v1/auth/refresh/",
+        `${API_URL}/api/v1/auth/refresh/`,
         expect.objectContaining({
           method: "POST",
           body: JSON.stringify({ refresh_token: "old-refresh-tok" }),
@@ -161,7 +162,7 @@ describe("proxy", () => {
         status: 401,
       });
 
-      const request = createMockRequest("http://localhost:3000/en/dashboard", [
+      const request = createMockRequest(`${APP_URL}/en/dashboard`, [
         { name: "access_token", value: makeToken(pastExp) },
         { name: "refresh_token", value: "expired-refresh-tok" },
       ]);
@@ -174,14 +175,14 @@ describe("proxy", () => {
 
   describe("public routes", () => {
     it("passes public routes through intl middleware", async () => {
-      const request = createMockRequest("http://localhost:3000/en/pricing");
+      const request = createMockRequest(`${APP_URL}/en/pricing`);
       await proxy(request);
 
       expect(fetchSpy).not.toHaveBeenCalled();
     });
 
     it("does not require auth for marketing pages", async () => {
-      const request = createMockRequest("http://localhost:3000/en/about");
+      const request = createMockRequest(`${APP_URL}/en/about`);
       const response = await proxy(request);
 
       const location = response.headers.get("location");
@@ -191,9 +192,7 @@ describe("proxy", () => {
 
   describe("locale handling in protected paths", () => {
     it("handles pt-BR locale prefix correctly", async () => {
-      const request = createMockRequest(
-        "http://localhost:3000/pt-BR/dashboard",
-      );
+      const request = createMockRequest(`${APP_URL}/pt-BR/dashboard`);
       const response = await proxy(request);
 
       expect(response.status).toBe(307);

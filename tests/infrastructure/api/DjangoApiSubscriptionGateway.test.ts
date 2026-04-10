@@ -13,6 +13,8 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL!;
+
 describe("DjangoApiSubscriptionGateway", () => {
   const gateway = new DjangoApiSubscriptionGateway();
 
@@ -89,8 +91,8 @@ describe("DjangoApiSubscriptionGateway", () => {
 
       const input = {
         planPriceId: "price_123",
-        successUrl: "http://localhost:3000/billing?status=success",
-        cancelUrl: "http://localhost:3000/billing",
+        successUrl: `${APP_URL}/billing?status=success`,
+        cancelUrl: `${APP_URL}/billing`,
       };
       const result = await gateway.createCheckoutSession(input);
 
@@ -98,8 +100,8 @@ describe("DjangoApiSubscriptionGateway", () => {
         method: "POST",
         body: JSON.stringify({
           plan_price_id: "price_123",
-          success_url: "http://localhost:3000/billing?status=success",
-          cancel_url: "http://localhost:3000/billing",
+          success_url: `${APP_URL}/billing?status=success`,
+          cancel_url: `${APP_URL}/billing`,
         }),
       });
       expect(result).toEqual(response);
@@ -111,8 +113,8 @@ describe("DjangoApiSubscriptionGateway", () => {
       await gateway.createCheckoutSession({
         planPriceId: "price_team",
         quantity: 5,
-        successUrl: "http://localhost:3000/billing?status=success",
-        cancelUrl: "http://localhost:3000/billing",
+        successUrl: `${APP_URL}/billing?status=success`,
+        cancelUrl: `${APP_URL}/billing`,
       });
 
       expect(mockApiFetch).toHaveBeenCalledWith(
@@ -130,13 +132,13 @@ describe("DjangoApiSubscriptionGateway", () => {
       const response = { url: "https://billing.stripe.com/portal_abc" };
       mockApiFetch.mockResolvedValue(response);
 
-      const input = { returnUrl: "http://localhost:3000/billing" };
+      const input = { returnUrl: `${APP_URL}/billing` };
       const result = await gateway.createBillingPortalSession(input);
 
       expect(mockApiFetch).toHaveBeenCalledWith("/billing/portal-sessions/", {
         method: "POST",
         body: JSON.stringify({
-          return_url: "http://localhost:3000/billing",
+          return_url: `${APP_URL}/billing`,
         }),
       });
       expect(result).toEqual(response);
