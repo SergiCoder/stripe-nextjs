@@ -1,4 +1,5 @@
 import type { Plan, PlanTier } from "@/domain/models/Plan";
+import { formatCurrency } from "@/lib/formatCurrency";
 
 export interface PlanCardLabels {
   upgrade: string;
@@ -101,18 +102,7 @@ function tierDisplayName(tier: PlanTier): string {
   return tier.charAt(0).toUpperCase() + tier.slice(1);
 }
 
-function formatPrice(
-  displayAmount: number,
-  currency: string,
-  locale: string,
-): string {
-  return new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency: currency.toUpperCase(),
-    minimumFractionDigits: 0,
-    maximumFractionDigits: displayAmount % 1 === 0 ? 0 : 2,
-  }).format(displayAmount);
-}
+const formatPrice = formatCurrency;
 
 /** Monthly-equivalent display amount, used to compare across intervals. */
 function monthlyEquivalent(plan: Plan): number {

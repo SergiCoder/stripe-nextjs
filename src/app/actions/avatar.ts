@@ -5,32 +5,47 @@ import { AuthError } from "@/domain/errors/AuthError";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://localhost:8443";
 
-export async function uploadAvatar(
-  formData: FormData,
-): Promise<{ avatarUrl?: string; error?: string }> {
-  let token: string;
+/** Resolve the auth token, returning an error string on failure. */
+async function resolveToken(
+  fallbackError: string,
+): Promise<{ token: string } | { error: string }> {
   try {
-    token = await getAuthToken();
+    return { token: await getAuthToken() };
   } catch (err) {
     if (err instanceof AuthError) {
       return { error: "Session expired. Please log in again." };
     }
-    return { error: "Upload failed." };
+    return { error: fallbackError };
   }
+}
+
+/** Extract an error message from a non-ok API response. */
+async function extractApiError(
+  res: Response,
+  fallbackError: string,
+): Promise<string> {
+  const contentType = res.headers.get("content-type") ?? "";
+  if (contentType.includes("application/json")) {
+    const data = (await res.json()) as { detail?: string };
+    return data.detail ?? fallbackError;
+  }
+  return fallbackError;
+}
+
+export async function uploadAvatar(
+  formData: FormData,
+): Promise<{ avatarUrl?: string; error?: string }> {
+  const auth = await resolveToken("Upload failed.");
+  if ("error" in auth) return { error: auth.error };
 
   const res = await fetch(`${API_URL}/api/v1/account/avatar/`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${auth.token}` },
     body: formData,
   });
 
   if (!res.ok) {
-    const contentType = res.headers.get("content-type") ?? "";
-    if (contentType.includes("application/json")) {
-      const data = (await res.json()) as { detail?: string };
-      return { error: data.detail ?? "Upload failed." };
-    }
-    return { error: "Upload failed. Please try again." };
+    return { error: await extractApiError(res, "Upload failed.") };
   }
 
   const data = (await res.json()) as { avatar_url: string };
@@ -38,28 +53,16 @@ export async function uploadAvatar(
 }
 
 export async function deleteAvatar(): Promise<{ error?: string }> {
-  let token: string;
-  try {
-    token = await getAuthToken();
-  } catch (err) {
-    if (err instanceof AuthError) {
-      return { error: "Session expired. Please log in again." };
-    }
-    return { error: "Delete failed." };
-  }
+  const auth = await resolveToken("Delete failed.");
+  if ("error" in auth) return { error: auth.error };
 
   const res = await fetch(`${API_URL}/api/v1/account/avatar/`, {
     method: "DELETE",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${auth.token}` },
   });
 
   if (!res.ok) {
-    const contentType = res.headers.get("content-type") ?? "";
-    if (contentType.includes("application/json")) {
-      const data = (await res.json()) as { detail?: string };
-      return { error: data.detail ?? "Delete failed." };
-    }
-    return { error: "Delete failed. Please try again." };
+    return { error: await extractApiError(res, "Delete failed.") };
   }
 
   return {};

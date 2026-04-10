@@ -5,19 +5,13 @@ import type {
 } from "@/application/ports/ISubscriptionGateway";
 import type { Subscription } from "@/domain/models/Subscription";
 import { apiFetch } from "./apiClient";
-import { keysToSnake, keysToCamel } from "./caseTransform";
+import {
+  keysToSnake,
+  keysToCamel,
+  keysToCamelWithPrice,
+} from "./caseTransform";
 
 export class DjangoApiSubscriptionGateway implements ISubscriptionGateway {
-  private static mapPlan(
-    raw: Record<string, unknown>,
-  ): Record<string, unknown> {
-    const plan = keysToCamel(raw) as Record<string, unknown>;
-    if (raw.price && typeof raw.price === "object") {
-      plan.price = keysToCamel(raw.price as Record<string, unknown>);
-    }
-    return plan;
-  }
-
   async getSubscription(currency?: string): Promise<Subscription | null> {
     try {
       const query = currency ? `?currency=${encodeURIComponent(currency)}` : "";
@@ -26,9 +20,9 @@ export class DjangoApiSubscriptionGateway implements ISubscriptionGateway {
       );
       const sub = keysToCamel<Subscription>(raw);
       if (raw.plan && typeof raw.plan === "object") {
-        sub.plan = DjangoApiSubscriptionGateway.mapPlan(
+        sub.plan = keysToCamelWithPrice<Subscription["plan"]>(
           raw.plan as Record<string, unknown>,
-        ) as unknown as Subscription["plan"];
+        );
       }
       return sub;
     } catch (err) {

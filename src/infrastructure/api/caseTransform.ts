@@ -21,3 +21,18 @@ export function keysToCamel<T>(obj: Record<string, unknown>): T {
   }
   return out as T;
 }
+
+/**
+ * Convert a raw API object's top-level keys to camelCase and, when a nested
+ * `price` object is present, convert its keys as well.  Covers Plan, Product,
+ * and Subscription responses that embed a price sub-object.
+ */
+export function keysToCamelWithPrice<T>(raw: Record<string, unknown>): T {
+  const result = keysToCamel<T>(raw);
+  if (raw.price && typeof raw.price === "object") {
+    (result as Record<string, unknown>).price = keysToCamel(
+      raw.price as Record<string, unknown>,
+    );
+  }
+  return result;
+}
