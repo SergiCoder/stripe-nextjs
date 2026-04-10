@@ -27,7 +27,13 @@ export async function GET(request: NextRequest) {
       httpOnly: true,
       secure: isProduction,
       sameSite: "lax",
-      maxAge: expiresIn ? parseInt(expiresIn, 10) : 900,
+      maxAge: (() => {
+        const parsed = expiresIn ? parseInt(expiresIn, 10) : NaN;
+        // Cap at 1 hour to limit damage if the parameter is tampered with
+        return Number.isFinite(parsed) && parsed > 0 && parsed <= 3600
+          ? parsed
+          : 900;
+      })(),
       path: "/",
     });
 

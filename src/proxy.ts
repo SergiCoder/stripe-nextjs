@@ -17,7 +17,10 @@ const PROTECTED_PREFIXES = [
 
 function isTokenExpired(token: string): boolean {
   try {
-    const payload = JSON.parse(atob(token.split(".")[1]));
+    const payload = JSON.parse(atob(token.split(".")[1])) as {
+      exp?: number;
+    };
+    if (typeof payload.exp !== "number") return true;
     // Consider expired 30s early to avoid race conditions
     return payload.exp * 1000 < Date.now() + 30_000;
   } catch {
