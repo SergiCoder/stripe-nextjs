@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/i18n/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { AlertBanner } from "@/presentation/components/molecules/AlertBanner";
@@ -22,14 +22,18 @@ export function VerifyEmailClient({ token }: VerifyEmailClientProps) {
 
     let ignore = false;
 
-    verifyEmail(token).then((result) => {
-      if (ignore) return;
-      if (result?.error) {
-        setError(result.error);
-      } else {
-        router.push("/dashboard");
-      }
-    });
+    verifyEmail(token)
+      .then((result) => {
+        if (ignore) return;
+        if (result?.error) {
+          setError(result.error);
+        } else {
+          router.push("/dashboard");
+        }
+      })
+      .catch(() => {
+        if (!ignore) setError(t("error"));
+      });
 
     return () => {
       ignore = true;
