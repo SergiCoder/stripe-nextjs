@@ -20,13 +20,20 @@ export function VerifyEmailClient({ token }: VerifyEmailClientProps) {
   useEffect(() => {
     if (!token) return;
 
+    let ignore = false;
+
     verifyEmail(token).then((result) => {
+      if (ignore) return;
       if (result?.error) {
         setError(result.error);
       } else {
         router.push("/dashboard");
       }
     });
+
+    return () => {
+      ignore = true;
+    };
   }, [token, router]);
 
   if (error) {

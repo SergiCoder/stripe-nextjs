@@ -98,12 +98,12 @@ export function ProfileForm({ user, phonePrefixes }: ProfileFormProps) {
         const formData = new FormData();
         formData.append("avatar", compressed, "avatar.webp");
         const result = await uploadAvatar(formData);
-        if (result.error) {
-          setAvatarError(result.error);
+        if (result.error || !result.avatarUrl) {
+          setAvatarError(result.error ?? "Upload failed.");
           return;
         }
-        await updateAvatarUrl(result.avatarUrl!);
-        setAvatarUrl(result.avatarUrl!);
+        await updateAvatarUrl(result.avatarUrl);
+        setAvatarUrl(result.avatarUrl);
       } else {
         const result = await deleteAvatar();
         if (result.error) {
