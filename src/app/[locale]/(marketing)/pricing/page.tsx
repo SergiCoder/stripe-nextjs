@@ -67,7 +67,6 @@ export default async function PricingPage() {
       isCurrent,
       isUpgrade,
       isTeam,
-      unitPrice,
       displayAmount,
       currency,
       ctaLabel,
@@ -90,7 +89,6 @@ export default async function PricingPage() {
         return (
           <TeamCheckoutButton
             planPriceId={plan.price.id}
-            unitPrice={unitPrice}
             displayAmount={displayAmount}
             currency={currency}
             locale={locale}

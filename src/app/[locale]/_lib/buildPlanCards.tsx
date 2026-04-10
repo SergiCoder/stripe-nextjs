@@ -54,7 +54,6 @@ export interface BuildPlanCardGroupsOptions {
     isCurrent: boolean;
     isUpgrade: boolean;
     isTeam: boolean;
-    unitPrice: number;
     displayAmount: number;
     currency: string;
     ctaLabel: string;
@@ -102,8 +101,6 @@ function tierDisplayName(tier: PlanTier): string {
   return tier.charAt(0).toUpperCase() + tier.slice(1);
 }
 
-const formatPrice = formatCurrency;
-
 /** Monthly-equivalent display amount, used to compare across intervals. */
 function monthlyEquivalent(plan: Plan): number {
   const amount = plan.price?.displayAmount ?? 0;
@@ -137,7 +134,6 @@ export function buildPlanCardGroups({
   }
 
   const buildVariant = (plan: Plan): PlanVariantView => {
-    const unitPrice = plan.price?.amount ?? 0;
     const displayAmount = plan.price?.displayAmount ?? 0;
     const currency = plan.price?.currency ?? "usd";
     const isTeam = plan.context === "team";
@@ -163,7 +159,7 @@ export function buildPlanCardGroups({
     let priceSubLabel: string | undefined;
     if (plan.interval === "year" && displayAmount > 0) {
       const monthlyEqDisplay = displayAmount / 12;
-      const formatted = formatPrice(monthlyEqDisplay, currency, locale);
+      const formatted = formatCurrency(monthlyEqDisplay, currency, locale);
       priceSubLabel = isTeam
         ? `${formatted}/${labels.seat}/month billed yearly`
         : `${formatted}/month billed yearly`;
@@ -171,8 +167,8 @@ export function buildPlanCardGroups({
 
     return {
       price: plan.price
-        ? formatPrice(displayAmount, currency, locale)
-        : formatPrice(0, currency, locale),
+        ? formatCurrency(displayAmount, currency, locale)
+        : formatCurrency(0, currency, locale),
       intervalLabel,
       priceSubLabel,
       cta:
@@ -181,7 +177,6 @@ export function buildPlanCardGroups({
           isCurrent,
           isUpgrade,
           isTeam,
-          unitPrice,
           displayAmount,
           currency,
           ctaLabel,
