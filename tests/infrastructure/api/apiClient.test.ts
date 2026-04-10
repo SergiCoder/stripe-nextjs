@@ -297,3 +297,31 @@ describe("publicApiFetch", () => {
     );
   });
 });
+
+describe("isNetworkError (via apiFetch)", () => {
+  it("wraps ECONNREFUSED TypeError into a user-friendly message", async () => {
+    const err = new TypeError("fetch failed");
+    (err as TypeError & { cause: { code: string } }).cause = {
+      code: "ECONNREFUSED",
+    };
+    fetchSpy.mockRejectedValue(err);
+
+    await expect(apiFetch("/account/")).rejects.toThrow(
+      "Unable to reach the server. Please try again later.",
+    );
+  });
+
+  it("wraps 'fetch failed' TypeError without cause into a user-friendly message", async () => {
+    fetchSpy.mockRejectedValue(new TypeError("fetch failed"));
+
+    await expect(apiFetch("/account/")).rejects.toThrow(
+      "Unable to reach the server. Please try again later.",
+    );
+  });
+
+  it("does not wrap non-TypeError errors", async () => {
+    fetchSpy.mockRejectedValue(new Error("something else"));
+
+    await expect(apiFetch("/account/")).rejects.toThrow("something else");
+  });
+});

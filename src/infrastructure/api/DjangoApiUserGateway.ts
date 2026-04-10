@@ -4,22 +4,7 @@ import type {
 } from "@/application/ports/IUserGateway";
 import type { User } from "@/domain/models/User";
 import { apiFetch } from "./apiClient";
-import { keysToCamel, keysToSnake } from "./caseTransform";
-
-function flattenPhone(raw: Record<string, unknown>, user: User): void {
-  const phoneData = raw.phone as
-    | { prefix: string; number: string }
-    | null
-    | undefined;
-
-  if (phoneData && typeof phoneData === "object") {
-    user.phonePrefix = phoneData.prefix;
-    user.phone = phoneData.number;
-  } else {
-    user.phonePrefix = null;
-    user.phone = null;
-  }
-}
+import { flattenPhone, keysToCamel, keysToSnake } from "./caseTransform";
 
 export class DjangoApiUserGateway implements IUserGateway {
   async getProfile(_userId: string): Promise<User> {

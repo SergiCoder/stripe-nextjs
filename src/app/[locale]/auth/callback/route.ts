@@ -46,6 +46,9 @@ export async function GET(request: NextRequest) {
       refreshTokenCookieOptions,
     );
 
+    // Prevent tokens from leaking via Referer header on the redirect target
+    response.headers.set("Referrer-Policy", "no-referrer");
+
     return response;
   }
 

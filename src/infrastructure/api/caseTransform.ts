@@ -27,6 +27,30 @@ export function keysToCamel<T>(obj: Record<string, unknown>): T {
  * `price` object is present, convert its keys as well.  Covers Plan, Product,
  * and Subscription responses that embed a price sub-object.
  */
+/**
+ * Flatten a nested `phone: { prefix, number }` API object into flat
+ * `phonePrefix` / `phone` fields on the target user object.
+ */
+export function flattenPhone(raw: Record<string, unknown>, user: Record<string, unknown>): void {
+  const phoneData = raw.phone as
+    | { prefix: string; number: string }
+    | null
+    | undefined;
+
+  if (phoneData && typeof phoneData === "object") {
+    user.phonePrefix = phoneData.prefix;
+    user.phone = phoneData.number;
+  } else {
+    user.phonePrefix = null;
+    user.phone = null;
+  }
+}
+
+/**
+ * Convert a raw API object's top-level keys to camelCase and, when a nested
+ * `price` object is present, convert its keys as well.  Covers Plan, Product,
+ * and Subscription responses that embed a price sub-object.
+ */
 export function keysToCamelWithPrice<T>(raw: Record<string, unknown>): T {
   const result = keysToCamel<T>(raw);
   if (raw.price && typeof raw.price === "object") {

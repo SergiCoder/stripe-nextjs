@@ -4,7 +4,10 @@ import { redirect } from "next/navigation";
 import { apiFetch, publicApiFetch } from "@/infrastructure/api/apiClient";
 import { SignOut } from "@/application/use-cases/auth/SignOut";
 import { authGateway } from "@/infrastructure/registry";
-import { setAuthCookies } from "@/infrastructure/auth/cookies";
+import {
+  clearAuthCookies,
+  setAuthCookies,
+} from "@/infrastructure/auth/cookies";
 
 interface TokenResponse {
   access_token: string;
@@ -214,7 +217,6 @@ export async function signOut() {
     await new SignOut(authGateway).execute();
   } catch {
     // Session already expired — clear cookies and redirect anyway
-    const { clearAuthCookies } = await import("@/infrastructure/auth/cookies");
     await clearAuthCookies();
   }
   redirect("/login");

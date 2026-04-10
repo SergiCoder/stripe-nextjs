@@ -3,7 +3,7 @@
 import { getAuthToken } from "@/infrastructure/api/apiClient";
 import { AuthError } from "@/domain/errors/AuthError";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://localhost:8443";
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 /** Resolve the auth token, returning an error string on failure. */
 async function resolveToken(

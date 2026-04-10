@@ -204,6 +204,59 @@ describe("user server actions", () => {
       const result = await updateProfile(undefined, formData);
       expect(result).toEqual({ error: "Failed to update profile" });
     });
+
+    it("returns fieldErrors when phone prefix is set but number is missing", async () => {
+      const formData = new FormData();
+      formData.set("fullName", "Jane Doe");
+      formData.set("phonePrefix", "+34");
+
+      const result = await updateProfile(undefined, formData);
+      expect(result).toEqual({
+        fieldErrors: { phone: "phoneNumberRequired" },
+      });
+      expect(mockUpdateUserProfileExecute).not.toHaveBeenCalled();
+    });
+
+    it("returns fieldErrors when phone number is set but prefix is missing", async () => {
+      const formData = new FormData();
+      formData.set("fullName", "Jane Doe");
+      formData.set("phone", "612345678");
+
+      const result = await updateProfile(undefined, formData);
+      expect(result).toEqual({
+        fieldErrors: { phone: "phonePrefixRequired" },
+      });
+      expect(mockUpdateUserProfileExecute).not.toHaveBeenCalled();
+    });
+
+    it("returns fieldErrors when phone number is too short", async () => {
+      const formData = new FormData();
+      formData.set("fullName", "Jane Doe");
+      formData.set("phonePrefix", "+34");
+      formData.set("phone", "123");
+
+      const result = await updateProfile(undefined, formData);
+      expect(result).toEqual({
+        fieldErrors: { phone: "phoneTooShort" },
+      });
+      expect(mockUpdateUserProfileExecute).not.toHaveBeenCalled();
+    });
+
+    it("returns session expired error when GetCurrentUser throws AuthError", async () => {
+      const { AuthError } = await import("@/domain/errors/AuthError");
+      mockGetCurrentUserExecute.mockRejectedValue(
+        new AuthError("No active session", "NO_SESSION"),
+      );
+
+      const formData = new FormData();
+      formData.set("fullName", "Jane Doe");
+
+      const result = await updateProfile(undefined, formData);
+      expect(result).toEqual({
+        error: "Session expired. Please log in again.",
+      });
+      expect(mockUpdateUserProfileExecute).not.toHaveBeenCalled();
+    });
   });
 
   describe("updateAvatarUrl", () => {
@@ -227,6 +280,27 @@ describe("user server actions", () => {
       expect(mockUpdateUserProfileExecute).toHaveBeenCalledWith("user_123", {
         avatarUrl: null,
       });
+    });
+
+    it("returns session expired error when GetCurrentUser throws AuthError", async () => {
+      const { AuthError } = await import("@/domain/errors/AuthError");
+      mockGetCurrentUserExecute.mockRejectedValue(
+        new AuthError("No active session", "NO_SESSION"),
+      );
+
+      const result = await updateAvatarUrl("https://example.com/avatar.webp");
+      expect(result).toEqual({
+        error: "Session expired. Please log in again.",
+      });
+    });
+
+    it("returns generic error on non-auth failure", async () => {
+      mockUpdateUserProfileExecute.mockRejectedValue(
+        new Error("Server error"),
+      );
+
+      const result = await updateAvatarUrl("https://example.com/avatar.webp");
+      expect(result).toEqual({ error: "Failed to update avatar" });
     });
   });
 

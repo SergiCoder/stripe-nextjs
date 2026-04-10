@@ -49,6 +49,16 @@ describe("DjangoApiProductGateway", () => {
       expect(result).toEqual([]);
     });
 
+    it("appends ?currency= query string when currency is provided", async () => {
+      mockApiFetch.mockResolvedValue(products);
+
+      await gateway.listProducts("eur");
+
+      expect(mockApiFetch).toHaveBeenCalledWith(
+        "/billing/products/?currency=eur",
+      );
+    });
+
     it("propagates errors from apiFetch", async () => {
       mockApiFetch.mockRejectedValue(new Error("API 500: Server Error"));
 

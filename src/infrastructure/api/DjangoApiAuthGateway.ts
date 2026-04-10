@@ -4,26 +4,11 @@ import type {
 } from "@/application/ports/IAuthGateway";
 import type { User } from "@/domain/models/User";
 import { apiFetch } from "./apiClient";
-import { keysToCamel } from "./caseTransform";
+import { flattenPhone, keysToCamel } from "./caseTransform";
 import {
   clearAuthCookies,
   getRefreshToken,
 } from "@/infrastructure/auth/cookies";
-
-function flattenPhone(raw: Record<string, unknown>, user: User): void {
-  const phoneData = raw.phone as
-    | { prefix: string; number: string }
-    | null
-    | undefined;
-
-  if (phoneData && typeof phoneData === "object") {
-    user.phonePrefix = phoneData.prefix;
-    user.phone = phoneData.number;
-  } else {
-    user.phonePrefix = null;
-    user.phone = null;
-  }
-}
 
 export class DjangoApiAuthGateway implements IAuthGateway {
   async getCurrentUser(): Promise<User> {
